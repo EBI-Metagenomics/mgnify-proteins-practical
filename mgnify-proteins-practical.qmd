@@ -8,9 +8,43 @@ format:
 
 In this practical, we will be looking at three major components of the MGnify Proteins database:
 
-- HMMER Sequence search using the MGnify Proteins website
+- HMMER sequence search using the MGnify Proteins website
 - The Protein Landing Pages for individual MGnify Proteins
 - Programmatic access to the database
+
+## MGnify Proteins website overview
+
+First, go to the [MGnify Proteins website](https://www.ebi.ac.uk/metagenomics/proteins/), and let's look at its main page together first.
+
+![**Figure 1.** The top part of the MGnify Proteins website main page. **A)** MGnify Protein sequences bear `MGYP` accessions, and it's possible to search for MGYPs of interest here. **B)** Information about the latest release can be found here, including the number of cluster representatives.](images/mgnify_proteins_website_top.png){width=100%}
+
+Figure 1 shows the top part of the main page. There are two points of interest here:
+
+- **A\)** A text box that allows you to input a known MGYP accession.
+- **B\)** Information about the latest MGnify Proteins release.
+
+### MGYP accessions
+
+All non-redundant protein sequences within the database are accessioned as **MGYP**s. For example, `MGYP008002629865` corresponds to the unique sequence:
+
+```
+>MGYP008002629865
+MEYKVLLTVFAAVFIAELGDKTQLATMLFAADKEVSKLTVFIGASFA
+LIAASGMGVLAGGFISQYMSERHLQLIAGIGFIAIGIWTLFKALTSG
+```
+
+This non-redundant sequence can then potentially be found in more than one assembly. If so, both occurrences of that sequence would have the same MGYP accession.
+
+We will come back to **A\)** later on in the practical, once we have some MGYPs of interest from running the HMMER sequence search.
+
+### MGnify Proteins releases
+
+The latest release of MGnify Proteins is from July 2026, and so its release name is `2026_07`. The release consists of **5,739,566,171 MGYPs**, however the MGnify Proteins website only supports the **MGnify90** cluster representatives, which is a smaller, but still substantial, subset of **1,661,142,385 MGYPs**, which is what can be seen in **B\)**.
+
+There are ways of accessing the full dataset programmatically, which we will look at in a later section.
+
+## HMMER sequence search
+
 
 
 <!-- Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.

@@ -1,3 +1,7 @@
+body {
+  text-align: justify;
+}
+
 .quarto-title-banner {
   background-size: 300px auto !important;
   background-position: 20px center !important;
