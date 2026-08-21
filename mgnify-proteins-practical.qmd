@@ -1,12 +1,19 @@
 ---
-title: "mgnify-proteins-practical"
-format: live-html
+title: "MetaExplore - MGnify Proteins Practical Session"
+title-block-banner: images/embl_ebi_logo.svg
+format:
+  live-html:
+    css: styles.css
 ---
 
+In this practical, we will be looking at three major components of the MGnify Proteins database:
 
-## Quarto
+- HMMER Sequence search using the MGnify Proteins website
+- The Protein Landing Pages for individual MGnify Proteins
+- Programmatic access to the database
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+<!-- Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 
 ```{ojs}
@@ -34,4 +41,4 @@ WHERE protein_id = 1;`,
 //| echo: false
 result = db.query(sql)
 Inputs.table(result)
-```
+``` -->

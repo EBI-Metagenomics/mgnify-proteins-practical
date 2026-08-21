@@ -1,0 +1,10 @@
+.quarto-title-banner {
+  background-size: 300px auto !important;
+  background-position: 20px center !important;
+  background-repeat: no-repeat !important;
+}
+
+.quarto-title-banner .quarto-title h1,
+.quarto-title-banner .title {
+  color: black !important;
+}
