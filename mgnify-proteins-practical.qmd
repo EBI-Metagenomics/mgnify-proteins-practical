@@ -1,0 +1,37 @@
+---
+title: "mgnify-proteins-practical"
+format: live-html
+---
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+
+```{ojs}
+//| echo: false
+import {DuckDBClient} from '@cmudig/duckdb'
+```
+
+```{ojs}
+//| echo: false
+db = DuckDBClient.of({})
+```
+
+```{ojs}
+//| echo: false
+viewof sql = Inputs.textarea({
+  label: "DuckDB query",
+  value: `SELECT *
+FROM 'https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/2026_07/mgy_protein_sequences.parquet'
+WHERE protein_id = 1;`,
+  rows: 6
+})
+```
+
+```{ojs}
+//| echo: false
+result = db.query(sql)
+Inputs.table(result)
+```
