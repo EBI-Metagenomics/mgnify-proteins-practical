@@ -12,3 +12,17 @@ body {
 .quarto-title-banner .title {
   color: black !important;
 }
+
+/* FASTA code block styling */
+pre.fasta,
+pre.sourceCode.fasta {
+  background-color: #e9ecef;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  font-family: 'Courier New', monospace;
+}
+
+code.sourceCode.fasta {
+  background-color: transparent;
+}

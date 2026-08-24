@@ -20,14 +20,14 @@ First, go to the [MGnify Proteins website](https://www.ebi.ac.uk/metagenomics/pr
 
 Figure 1 shows the top part of the main page. There are two points of interest here:
 
-- **A\)** A text box that allows you to input a known MGYP accession.
-- **B\)** Information about the latest MGnify Proteins release.
+- **A)** A text box that allows you to input a known MGYP accession.
+- **B)** Information about the latest MGnify Proteins release.
 
 ### MGYP accessions
 
 All non-redundant protein sequences within the database are accessioned as **MGYP**s. For example, `MGYP008002629865` corresponds to the unique sequence:
 
-```
+```fasta
 >MGYP008002629865
 MEYKVLLTVFAAVFIAELGDKTQLATMLFAADKEVSKLTVFIGASFA
 LIAASGMGVLAGGFISQYMSERHLQLIAGIGFIAIGIWTLFKALTSG
@@ -45,6 +45,52 @@ There are ways of accessing the full dataset programmatically, which we will loo
 
 ## HMMER sequence search
 
+HMMER is an algorithm for performing searches against a target sequence database. On the MGnify Proteins website, it's possible to input a query sequence into the HMMER Web Service (TODO: insert paper ref) to search for similar sequences in the MGnify30 clustering of the database.
+
+### MGnify30
+More specifically, MGnify30 is split into three subsets:
+
+| MGnify30-C2 | MGnify30-C5-FL | MGnify30-C5-PPfam |
+|-------------|----------------|-------------------|
+| 128,674,267 | 20,911,652     | 18,155,509        |
+
+#### Non-singletons (MGnify30-C2)
+The non-singletons subset was created by extracting clusters that have **at least two members**, thereby excluding a majority of the representatives. This subset contains **128,674,267 cluster representatives**.
+
+#### Larger non-singletons (MGnify30-C5-FL)
+The larger non-singletons subset was created by extracting clusters that have **at least five members, including at least one member that is predicted to be a full-length sequence**. This subset therefore reduces the space even further, and guarantees at least one full-length sequence for increased confidence. This subset contains **20,911,652 cluster representatives**.
+
+#### Pfam-poor non-singletons (MGnify30-C5-PPfam)
+The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset similarly reduces the space significantly, and contains clusters for which function is relatively unknown. This subset contains **18,155,509 cluster representatives**.
+
+### Running HMMER sequence search on MGnify30
+
+![**Figure 2.** The bottom part of the MGnify Proteins website main page, with an input form for running HMMER sequence search on MGnify Proteins data. **A)** To run HMMER, input a query sequence for which you want to find similar hits within MGnify Proteins in this text box. An example input can be displayed by clicking on `example` above the text box. **B)** You can choose between three subsets of the MGnify30 clustering of the database here. **C)** You can modify some of the basic search parameters for HMMER here if necessary for your use case e.g. more strict searching criteria, although for most cases the default values should be fine.](images/mgnify_proteins_website_bottom.png){width=100%}
+
+Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - **A)** - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - **B)** - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - **C)** - some of the adjustable parameters while running HMMER are displayed. The default settings are good enough to get high homology hits, and should therefore suit most cases. However, if you need more stringent search parameters for your use case, lowering the E-value thresholds can help achieve this.
+
+For this part of the practical, we will work with this sequence:
+
+```fasta
+>O49499
+MATTTTEATKTSSTNGEDQKQSQNLRHQEVGHKSLLQSDDLYQYILETSVYPRE
+PESMKELREVTAKHPWNIMTTSADEGQFLNMLIKLVNAKNTMEIGVYTGYSLLA
+TALALPEDGKILAMDVNRENYELGLPIIEKAGVAHKIDFREGPALPVLDEIVAD
+EKNHGTYDFIFVDADKDNYINYHKRLIDLVKIGGVIGYDNTLWNGSVVAPPDAP
+MRKYVRYYRDFVLELNKALAADPRIEICMLPVGDGITICRRIS
+```
+
+Specifically, this sequence is a methyltransferase enzyme with the Uniprot accession [O49499](https://www.uniprot.org/uniprotkb/O49499). Imagine this was your sequence of interest, and copy paste it into the textbox. We will keep the default database (**MGnify30-C2**) and parameters for this search. Once you've pasted the sequence into the textbox, click on the **Search** button.
+
+### Understanding HMMER results
+
+After waiting about a minute, you will be redirected to a webpage containing the results of your search:
+
+![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More detail about a match can be found by clicking on the arrow here, including the full alignment.](images/mgnify_proteins_hmmer_results.png){width=100%}
+
+The result page is organised into two major sections, with the first (**A**) containing information about which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for "O-methyltransferase". That Pfam matches what we know about our query sequence from its Uniprot entry, which is good!
+
+Below it, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.
 
 
 <!-- Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
