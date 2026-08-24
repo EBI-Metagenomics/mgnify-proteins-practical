@@ -3,14 +3,35 @@ title: "MetaExplore - MGnify Proteins Practical Session"
 title-block-banner: images/embl_ebi_logo.svg
 format:
   live-html:
+    toc: true
+    toc-depth: 4
+    toc-location: right
     css: styles.css
+    other-links:
+      - text: Get your data analysed by MGnify
+        href: https://www.ebi.ac.uk/metagenomics/
+      - text: Use HMMER Web to search other databases
+        href: https://www.ebi.ac.uk/Tools/hmmer/search/phmmer?database=mgnify30_c2
+bibliography: references.bib
+
 ---
 
-In this practical, we will be looking at three major components of the MGnify Proteins database:
+## Introduction
 
-- HMMER sequence search using the MGnify Proteins website
-- The Protein Landing Pages for individual MGnify Proteins
-- Programmatic access to the database
+The MGnify Proteins database aggregates 5.7 billion non-redundant protein sequences from the outputs of the MGnify Assembly Analysis Pipeline. The database connects these sequences to the metadata of the assemblies they originate from. These connections create a resource that can be exploited not only for its massive sequence space, but also for the insight it offers into how sequences relate to their biomes of origin, among other things.
+
+In this practical, you will learn how to access the data for the latest MGnify Proteins release in three different ways. First, for a given sequence of interest, you will use the HMMER Web sequence search tool to retrieve sequences with similar sequence profiles. The resulting list of sequences can then be explored in detail using their respective Protein Landing Pages. Finally, for larger and programmatic access of MGnify Proteins, you will see three examples of how the Parquet files that make up the release can be queried using modern tools like DuckDB.
+
+#### Learning outcomes
+
+**TODO: reword some of these**
+
+- How MGnify Proteins is generated from MGnify analyses
+- How to use HMMER Web to search for sequences with similar sequence profiles in MGnify Proteins
+- How to explore the Protein Landing Pages to gather information about different MGnify Protein sequences
+- How to perform basic querying of the MGnify Proteins release Parquet files for larger-scale data retrieval
+
+
 
 ## MGnify Proteins website overview
 
@@ -23,7 +44,7 @@ Figure 1 shows the top part of the main page. There are two points of interest h
 - **A)** A text box that allows you to input a known MGYP accession.
 - **B)** Information about the latest MGnify Proteins release.
 
-### MGYP accessions
+### MGYP accessions {#sec-mgyp-accessions}
 
 All non-redundant protein sequences within the database are accessioned as **MGYP**s. For example, `MGYP008002629865` corresponds to the unique sequence:
 
@@ -35,7 +56,9 @@ LIAASGMGVLAGGFISQYMSERHLQLIAGIGFIAIGIWTLFKALTSG
 
 This non-redundant sequence can then potentially be found in more than one assembly. If so, both occurrences of that sequence would have the same MGYP accession.
 
-We will come back to **A\)** later on in the practical, once we have some MGYPs of interest from running the HMMER sequence search.
+:::{.callout-note}
+You can come back to **A\)** later on in the practical, once we have an MGYP of interest from running the HMMER sequence search.
+:::
 
 ### MGnify Proteins releases
 
@@ -45,7 +68,7 @@ There are ways of accessing the full dataset programmatically, which we will loo
 
 ## HMMER sequence search
 
-HMMER is an algorithm for performing searches against a target sequence database. On the MGnify Proteins website, it's possible to input a query sequence into the HMMER Web Service (TODO: insert paper ref) to search for similar sequences in the MGnify30 clustering of the database.
+HMMER is an algorithm for performing searches against a target sequence database. On the MGnify Proteins website, it's possible to input a query sequence into the HMMER Web Service [-@rajkovic2026hmmer] to search for similar sequences in the MGnify30 clustering of the database.
 
 ### MGnify30
 More specifically, MGnify30 is split into three subsets:
@@ -82,16 +105,39 @@ MRKYVRYYRDFVLELNKALAADPRIEICMLPVGDGITICRRIS
 
 Specifically, this sequence is a methyltransferase enzyme with the Uniprot accession [O49499](https://www.uniprot.org/uniprotkb/O49499). Imagine this was your sequence of interest, and copy paste it into the textbox. We will keep the default database (**MGnify30-C2**) and parameters for this search. Once you've pasted the sequence into the textbox, click on the **Search** button.
 
+:::{.callout-note}
+We pasted the sequence in FASTA format, but you can just paste the sequence as is without the `>` header.
+:::
+
 ### Understanding HMMER results
 
 After waiting about a minute, you will be redirected to a webpage containing the results of your search:
 
 ![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More detail about a match can be found by clicking on the arrow here, including the full alignment.](images/mgnify_proteins_hmmer_results.png){width=100%}
 
-The result page is organised into two major sections, with the first (**A**) containing information about which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for "O-methyltransferase". That Pfam matches what we know about our query sequence from its Uniprot entry, which is good!
+The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for "O-methyltransferase". That Pfam matches what we know about our query sequence from its Uniprot entry, which is good!
 
-Below it, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.
+Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match. The table is sorted by E-value in descending order, and the lower the E-value the higher confidence we can have in the match! That means that first MGYP, **MGYP002778845309**, is the highest confidence match to our query target.
 
+We can see some more details about this match by clicking on the arrow on the leftmost side of the row (**C**). This expands the row, reveals the sequence alignment between the query and the target, and shows a new table with further information about this alignment.
+
+:::{.callout-note}
+Documentation about this expanded view can be found [here](https://hmmer-web-docs.readthedocs.io/en/latest/result.html#alignments).
+:::
+
+## Protein detail pages
+
+Every cluster representative has a protein detail page, which contains information about that particular MGYP. It's possible to go straight to an MGYP's landing page from the HMMER result by clicking on the target MGYP, but it's also possible to write the MGYP accession into the text box at the top of the MGnify Proteins' main page, as mentioned [previously](#sec-mgyp-accessions).
+
+As we have a results page open, let's click on the best hit (**MGYP002778845309**) to open its [landing page](https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/).
+
+![**Figure 4.** TODO](images/mgnify_proteins_protein_detail_top.png){width=100%}
+
+
+
+:::{.callout-warning}
+TODO: Tertiary structures warning
+:::
 
 <!-- Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
