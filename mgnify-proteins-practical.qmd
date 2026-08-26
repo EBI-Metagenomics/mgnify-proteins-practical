@@ -258,10 +258,10 @@ db = DuckDBClient.of({})
 
 ```{ojs}
 //| echo: false
-viewof sql = Inputs.textarea({
+viewof sqlInput = Inputs.textarea({
   label: "DuckDB Query",
   value: `SELECT *
-FROM 'data/mgy_protein_sequences.parquet'
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
 WHERE protein_id = 9395360842;`,
   rows: 6
 })
@@ -269,8 +269,31 @@ WHERE protein_id = 9395360842;`,
 
 ```{ojs}
 //| echo: false
-result = db.query(sql)
-Inputs.table(result)
+mutable executedSQL = null
+```
+
+```{ojs}
+//| echo: false
+viewof runButton = Inputs.button("Run Query", {
+  reduce: (count) => {
+    mutable executedSQL = sqlInput;
+    return count + 1;
+  }
+})
+```
+
+```{ojs}
+//| echo: false
+result = {
+  if (executedSQL === null) return null;
+  runButton; // Depend on button to trigger re-execution
+  return db.query(executedSQL);
+}
+```
+
+```{ojs}
+//| echo: false
+result === null ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the SQL query above.</p>` : Inputs.table(result)
 ```
 
 <!-- :::: {.panel-tabset}
