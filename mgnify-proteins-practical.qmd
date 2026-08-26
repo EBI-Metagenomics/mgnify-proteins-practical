@@ -258,28 +258,51 @@ db = DuckDBClient.of({})
 
 ```{ojs}
 //| echo: false
-viewof sqlInput = Inputs.textarea({
-  label: "DuckDB Query",
-  value: `SELECT *
-FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
-WHERE protein_id = 9395360842;`,
-  rows: 6
-})
-```
-
-```{ojs}
-//| echo: false
 mutable executedSQL = null
 ```
 
 ```{ojs}
 //| echo: false
-viewof runButton = Inputs.button("Run Query", {
-  reduce: (count) => {
-    mutable executedSQL = sqlInput;
-    return count + 1;
+mutable buttonClicks = 0
+```
+
+```{ojs}
+//| echo: false
+queryUI = html`<div class="query-container">
+  <label style="display: flex; justify-content: space-between; align-items: center;">
+    <span>DuckDB Query</span>
+    <button class="run-query-btn" id="runQueryBtn">Run Query</button>
+  </label>
+  <textarea
+    id="sqlTextarea"
+    rows="6"
+    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"
+  >SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
+WHERE protein_id = 9395360842;</textarea>
+</div>`
+```
+
+```{ojs}
+//| echo: false
+setupQueryUI = {
+  const btn = document.getElementById("runQueryBtn");
+  const textarea = document.getElementById("sqlTextarea");
+
+  if (btn && textarea) {
+    btn.onclick = () => {
+      mutable executedSQL = textarea.value;
+      mutable buttonClicks = buttonClicks + 1;
+    };
   }
-})
+
+  return null;
+}
+```
+
+```{ojs}
+//| echo: false
+runButton = buttonClicks
 ```
 
 ```{ojs}
@@ -293,7 +316,11 @@ result = {
 
 ```{ojs}
 //| echo: false
-result === null ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the SQL query above.</p>` : Inputs.table(result)
+result === null ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>` : Inputs.table(result, {
+  format: {
+    protein_id: x => x
+  }
+})
 ```
 
 <!-- :::: {.panel-tabset}
