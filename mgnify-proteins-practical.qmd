@@ -258,70 +258,86 @@ db = DuckDBClient.of({})
 
 ```{ojs}
 //| echo: false
-mutable executedSQL = null
-```
+mutable console1_sql = null
+mutable console1_clicks = 0
 
-```{ojs}
-//| echo: false
-mutable buttonClicks = 0
-```
-
-```{ojs}
-//| echo: false
-queryUI = html`<div class="query-container">
+console1_ui = html`<div class="query-container">
   <label style="display: flex; justify-content: space-between; align-items: center;">
     <span>DuckDB Query</span>
-    <button class="run-query-btn" id="runQueryBtn">Run Query</button>
+    <button class="run-query-btn" id="runBtn_console1">Run Query</button>
   </label>
   <textarea
-    id="sqlTextarea"
+    id="sqlTextarea_console1"
     rows="6"
     style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"
   >SELECT *
 FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
 WHERE protein_id = 9395360842;</textarea>
 </div>`
-```
 
-```{ojs}
-//| echo: false
-setupQueryUI = {
-  const btn = document.getElementById("runQueryBtn");
-  const textarea = document.getElementById("sqlTextarea");
-
+console1_setup = {
+  const btn = document.getElementById("runBtn_console1");
+  const textarea = document.getElementById("sqlTextarea_console1");
   if (btn && textarea) {
     btn.onclick = () => {
-      mutable executedSQL = textarea.value;
-      mutable buttonClicks = buttonClicks + 1;
+      mutable console1_sql = textarea.value;
+      mutable console1_clicks = console1_clicks + 1;
     };
   }
-
   return null;
 }
-```
 
-```{ojs}
-//| echo: false
-runButton = buttonClicks
-```
-
-```{ojs}
-//| echo: false
-result = {
-  if (executedSQL === null) return null;
-  runButton; // Depend on button to trigger re-execution
-  return db.query(executedSQL);
+console1_result = {
+  if (console1_sql === null) return null;
+  console1_clicks;
+  return db.query(console1_sql);
 }
+
+console1_result === null
+  ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>`
+  : Inputs.table(console1_result, { format: { protein_id: x => x } })
 ```
 
 ```{ojs}
 //| echo: false
-result === null ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>` : Inputs.table(result, {
-  format: {
-    protein_id: x => x
+mutable console2_sql = null
+mutable console2_clicks = 0
+
+console2_ui = html`<div class="query-container">
+  <label style="display: flex; justify-content: space-between; align-items: center;">
+    <span>Another Query</span>
+    <button class="run-query-btn" id="runBtn_console2">Run Query</button>
+  </label>
+  <textarea
+    id="sqlTextarea_console2"
+    rows="6"
+    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"
+  >SELECT COUNT(*) FROM 'https://...';</textarea>
+</div>`
+
+console2_setup = {
+  const btn = document.getElementById("runBtn_console2");
+  const textarea = document.getElementById("sqlTextarea_console2");
+  if (btn && textarea) {
+    btn.onclick = () => {
+      mutable console2_sql = textarea.value;
+      mutable console2_clicks = console2_clicks + 1;
+    };
   }
-})
+  return null;
+}
+
+console2_result = {
+  if (console2_sql === null) return null;
+  console2_clicks;
+  return db.query(console2_sql);
+}
+
+console2_result === null
+  ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>`
+  : Inputs.table(console2_result, { format: { protein_id: x => x } })
 ```
+
 
 <!-- :::: {.panel-tabset}
 
