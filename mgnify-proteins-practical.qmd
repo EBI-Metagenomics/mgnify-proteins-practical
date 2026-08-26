@@ -22,7 +22,7 @@ bibliography: references.bib
 
 The MGnify Proteins database aggregates 5.7 billion non-redundant protein sequences from the outputs of the MGnify Assembly Analysis Pipeline. The database connects these sequences to the metadata of the assemblies they originate from. These connections create a resource that can be exploited not only for its massive sequence space, but also for the insight it offers into how sequences relate to their biomes of origin, among other things.
 
-In this practical, you will learn how to access the data for the latest MGnify Proteins release in three different ways. First, for a given sequence of interest, you will use the HMMER Web sequence search tool to retrieve sequences with similar sequence profiles. The resulting list of sequences can then be explored in detail using their respective Protein Landing Pages. Finally, for larger and programmatic access of MGnify Proteins, you will see three examples of how the Parquet files that make up the release can be queried using modern tools like DuckDB.
+In this practical, you will learn how to access the data for the latest MGnify Proteins release in three different ways. First, for a given sequence of interest, you will use the HMMER Web sequence search tool to retrieve sequences with similar sequence profiles. The resulting list of sequences can then be explored in detail using their respective protein detail pages. Finally, for larger and programmatic access of MGnify Proteins, you will see three examples of how the Parquet files that make up the release can be queried using modern tools like DuckDB.
 
 #### Learning outcomes
 
@@ -175,20 +175,76 @@ Finally, the primary sequence of the MGYP can be found at the bottom if its deta
 
 ## Programmatic access of MGnify Proteins
 
-### MGnify Proteins API
+So far, we have seen how we can find data on MGnify Proteins by performing a HMMER sequence search, and by browsing the website. However, so far everything we have done has been manual and in the browser, which is not practical if your work requires more automatic data retrieval. To that end, in this section we will look at how we can access MGnify Proteins data in a programmatic way, in two different ways.
+
+### Accessing MGnify90 using the Proteins API
+
+The same data that powers the protein detail pages on your browser is accessible as a simple API. Documentation for the API can be found [here](https://www.ebi.ac.uk/metagenomics/proteins/api/v1/docs#/).
+
+#### Protein detail endpoint
+
+Have a look at this Python example of how you can query the API's protein detail endpoint to retrieve the same data we were looking at earlier for **MGYP002778845309**: 
 
 ```{pyodide}
 #| edit: true
 #| autorun: false
 import requests
 
-print(requests.get("https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein/MGYP002778845309'"))
+protein_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein"
+
+mgyp = "MGYP002778845309"
+res = requests.get(
+  f"{protein_endpoint}/{mgyp}"
+).json()
+
+print(res)
 ```
 
+This code queries the API and returns a JSON response. This JSON response can easily be parsed as a Python dictionary to retrieve data. For example, to retrieve the sequence of this MGYP:
+```{pyodide}
+print(res["sequence"])
+```
 
-### Release Parquet files
+Or to retrieve all of this MGYP's biomes, you could write something like this:
+```{pyodide}
+for biome in res["biomes"]:
+  print(biome["name"])
+```
 
-As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of MGnify Proteins sequence data and metadata. There are numerous advantages to this shift:
+Have a go at querying a different MGYP from the HMMER search results we generated earlier!
+
+:::{.callout-note}
+The API exposes the same data that is present on the MGnify Proteins website. That means only the MGnify90 cluster representatives are queryable using this method.
+:::
+
+#### Protein search endpoint
+
+If you want to search for an attribute of a protein rather than finding a specific MGYP e.g. a specific biome or PFAM accession, you can use the protein search endpoint. For example, to grab 5 MGYPs with the Wastewater biome:
+
+```{pyodide}
+import requests
+
+protein_search_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein/search"
+
+biome_string = "root:Engineered:Wastewater"
+mgyp_count = 5
+
+res = requests.get(
+  f"{protein_search_endpoint}?limit={mgyp_count}&biome_lineage={biome_string}"
+).json()
+
+print(res)
+```
+
+These MGYPs could then be searched programmatically with the detail endpoint we went through earlier!
+
+Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession **PF01596**.
+
+### Accessing all of MGnify Proteins with the release Parquet files
+
+So far we've looked at how we can access MGnify90 data. However, MGnify90 contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.
+
+There are programmatic ways of accessing this data, by downloading the latest release files. You can see the full release on our [FTP](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/). The `README.md` [file](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) in the FTP gives an in-depth description of the release files. As you can see, the release is mostly made up of flat files like .tsv and .fasta files. You can download and parse these, however **we highly recommend you instead use the equivalent .parquet files**. As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of the full MGnify Proteins release files due to numerous advantages:
 
 - Columnar data access: As Parquet is a columnar data format, certain query structures that are commonly used to search MGnify Proteins metadata become significantly faster, as only columns of interest need to be searched. Columnar data similarly allows for partial reading of remote files.
 - Native schemas: Parquet stores metadata about each column within a file - including data types - much like a relational database. These schemas allows for a more explicit data structure, more robust data validation, and more efficient queries e.g. querying based on integer identifiers in a Parquet file vs flat-files without a schema like .tsv, the possibility of applying Bloom filters, etc.
@@ -205,8 +261,8 @@ db = DuckDBClient.of({})
 viewof sql = Inputs.textarea({
   label: "DuckDB Query",
   value: `SELECT *
-FROM 'https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/2026_07/mgy_protein_sequences.parquet'
-WHERE protein_id = 2778845309;`,
+FROM 'data/mgy_protein_sequences.parquet'
+WHERE protein_id = 9395360842;`,
   rows: 6
 })
 ```
