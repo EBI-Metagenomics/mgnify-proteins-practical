@@ -133,6 +133,8 @@ Every cluster representative has a protein detail page, which contains informati
 
 As we have a results page open, let's click on the best hit (**MGYP002778845309**) to open its [detail page](https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/). The detail page has multiple sections with useful information that we will go through, starting with its top half:
 
+### Cluster, biome, & Pfam information
+
 ![**Figure 4.** The top half of a MGnify90 detail page. **A)** You can see how many MGYPs are within the cluster represented by this representative - in this case seven. You can also see whether the representative is a full-length protein - in this case it is, as per the checked box. **B)** As every sequence in MGnify Proteins is sourced from at least one biome-tagged assembly, we can display the different biomes the cluster representative was found in. In the case of this representative, it was found in one biome: freshwater. **C)** If the cluster representative has at least one Pfam annotation, they will be displayed in this table. The different annotations are also displayed on the interactive sequence viewer at the bottom, so that you can see where the annotations lie on the sequence. ](images/mgnify_proteins_protein_detail_top.png){width=100%}
 
 
@@ -150,6 +152,8 @@ Finally, similar to the HMMER results, we can see how many Pfam accessions were 
 You can interact with the sequence viewer by zooming in, zooming out, and dragging it around.
 :::
 
+### Tertiary structure, cross-references, & primary sequence information
+
 As you scroll down from here, we have three more sections of interest in the bottom half of the protein detail page:
 
 ![**Figure 5.** The bottom half of a MGnify90 detail page. **A)** Almost half of the cluster representatives (772 million) have a tertiary structure, which were predicted by ESMFold in 2023 for the ESM Metagenomic Atlas. If an MGYP has a structure, it will can be viewed and interacted with here. **B)** You can find metadata about an MGYP's source here, including all studies, asssemblies, and contigs it was found in. **C)** The sequence of the MGYP can be viewed and copied here.](images/mgnify_proteins_protein_detail_bottom.png){width=80%}
@@ -161,16 +165,57 @@ In 2023, Meta generated tertiary structures using their tool ESMFold for all of 
 With the latest release (`2027_07`) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for almost half of the cluster representatives. There will therefore be cases where an MGYP's detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.
 :::
 
-The page also contains a table containing further metadata about the MGYP (**B**). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in for an assembly. If you're interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of MGnify Proteins, which we will explore in the next section.
+The page also contains a table containing further metadata about the MGYP (**B**). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in for an assembly. If you're interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.
 
 :::{.callout-note}
 The study and assembly links are cross-referenced to their respective pages on the main MGnify website. Feel free to explore these links to see what else you can find out about the origin of this protein!
 :::
 
-Finally, the sequence of the MGYP can be found at the bottom if its detail page (**C**). There is a copy button you can click if you want to paste it into anything you might need e.g. a fasta file, a different tool, or simply your notes!
+Finally, the primary sequence of the MGYP can be found at the bottom if its detail page (**C**). There is a copy button you can click if you want to paste it into anything you might need e.g. a fasta file, a different tool, or just your notes!
+
+## Programmatic access of MGnify Proteins
+
+### MGnify Proteins API
+
+```{pyodide}
+#| edit: true
+#| autorun: false
+import requests
+
+print(requests.get("https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein/MGYP002778845309'"))
+```
 
 
+### Release Parquet files
 
+As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of MGnify Proteins sequence data and metadata. There are numerous advantages to this shift:
+
+- Columnar data access: As Parquet is a columnar data format, certain query structures that are commonly used to search MGnify Proteins metadata become significantly faster, as only columns of interest need to be searched. Columnar data similarly allows for partial reading of remote files.
+- Native schemas: Parquet stores metadata about each column within a file - including data types - much like a relational database. These schemas allows for a more explicit data structure, more robust data validation, and more efficient queries e.g. querying based on integer identifiers in a Parquet file vs flat-files without a schema like .tsv, the possibility of applying Bloom filters, etc.
+- Native compression: Parquet is a naturally compressed file format, with data types allowing for more efficient storing of this data.
+- Partial reading: Using tools like DuckDB that support partial reading on Parquet files, it is possible make remote queries without downloading the entire source file, unlike with regular flat file formats like .tsv.
+
+```{ojs}
+//| echo: false
+db = DuckDBClient.of({})
+```
+
+```{ojs}
+//| echo: false
+viewof sql = Inputs.textarea({
+  label: "DuckDB Query",
+  value: `SELECT *
+FROM 'https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/2026_07/mgy_protein_sequences.parquet'
+WHERE protein_id = 2778845309;`,
+  rows: 6
+})
+```
+
+```{ojs}
+//| echo: false
+result = db.query(sql)
+Inputs.table(result)
+```
 
 <!-- :::: {.panel-tabset}
 
@@ -200,34 +245,3 @@ starwars |>                                 #<1>
 
 :::: -->
 
-
-
-<!-- Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-
-```{ojs}
-//| echo: false
-import {DuckDBClient} from '@cmudig/duckdb'
-```
-
-```{ojs}
-//| echo: false
-db = DuckDBClient.of({})
-```
-
-```{ojs}
-//| echo: false
-viewof sql = Inputs.textarea({
-  label: "DuckDB query",
-  value: `SELECT *
-FROM 'https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/2026_07/mgy_protein_sequences.parquet'
-WHERE protein_id = 1;`,
-  rows: 6
-})
-```
-
-```{ojs}
-//| echo: false
-result = db.query(sql)
-Inputs.table(result)
-``` -->
