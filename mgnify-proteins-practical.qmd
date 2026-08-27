@@ -251,6 +251,103 @@ There are programmatic ways of accessing this data, by downloading the latest re
 - Native compression: Parquet is a naturally compressed file format, with data types allowing for more efficient storing of this data.
 - Partial reading: Using tools like DuckDB that support partial reading on Parquet files, it is possible make remote queries without downloading the entire source file, unlike with regular flat file formats like .tsv.
 
+In this section, we will see how we can query the parquet files using [DuckDB](https://duckdb.org/), which is an SQL-based, fast, simple to use tool, and which has APIs for popular languages like Python.
+
+#### A simple example DuckDB query
+
+Most of the parquet files are too lage to download for this practical, and remotely querying them can be slow. For the purpose of this practical, we therefore made very small versions of the key files to test here. They are structurally identical to the release files, and so the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) can be read to gain an overview of the contents of the files, while this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) can be used to find some example queries.
+
+To point to the correct file in your query, right-click on the file of interest and **copy the link**. You **do not need to download the files** for this practical (although you are welcome to if you want to use them on your own machine). The test files are:
+
+- [mgy_protein_sequences.parquet](https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet)
+- [mgy_proteins_metadata.parquet](https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet)
+- [mgy_proteins_pfam.parquet](https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_pfam.parquet)
+
+For example, to query the `mgy_protein_sequences.parquet` file for **MGYP009395360842**:
+
+:::: {.panel-tabset}
+
+## Example query
+
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
+WHERE protein_id=9395360842
+```
+
+## Query result
+<div style="overflow-x: auto;">
+| protein_id | full_length | sequence |
+|-----------:|-------------|----------|
+| 9395360842 | true        | MMHGGINMIVLGQYCNLVVSKKVDFGYYLKDKFGDEVLLPNSACKGTVINEGDKIEVFVYRDSKDRMICTLKKPYLTTGEVAYLKIVSQSSIGAFADIGLERDLFIPLKEQSFKLKTGEKYLIYMYIDKTDRLAGTTKVDLYLDTAEEGKYNVNDEVSAIVYNTNENGTLNVAIDGKYKGLILANEHFDYLYPGQVINARVKRIYEDGMIGVTTRKKRLDAREELSETILSMLKKNGGFMPYNDKSSPEDIKREFNTSKNYFKMTLGGLMKKKLITQDKEGTRLL |
+</div>
+
+::::
+
+To change parquet files, simply swap the string after the `FROM` statement with the new parquet file path.
+
+:::{.callout-important}
+You will have gotten used to each MGYP being referred to with the MGYP prefix. Within the parquet files, these **prefixes are removed**, so that the data type can be an integer (which has advantages for performance). If you have an MGYP of interest and want to query it in the parquet files, strip the MGYP prefix and any leading zeroes. For example, for the protein sequence **MGYP007613976461**, its equivalent `protein_id` value would be **7613976461**. The same thing is true for Pfam accessions, e.g. **PF01596** would have the `pfam_accession` value **1596**.
+:::
+
+#### Try out these four example queries
+
+Below, you will find an editable console you can use to write and run DuckDB queries. We've prepared four tasks that you need to write queries for - have a go at them, and then compare them to the pre-written solutions!
+
+:::: {.panel-tabset}
+
+## Querying metadata by assembly
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the assembly **ERZ24519387**.
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Show me the solution
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet' 
+WHERE assembly_accession = 'ERZ24519387';
+```
+:::
+
+## Querying metadata by study
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the study **ERP104209**.
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Show me the solution
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet' 
+WHERE study_accession = 'ERP104209';
+```
+:::
+
+## Querying sequences by full_length status and sequence length
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all protein sequences that are **full_length** and have a **minimum sequence length of 200**.
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Show me the solution
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet' 
+WHERE full_length AND length(sequence) >= 200;
+```
+:::
+
+## Querying Pfam by Pfam accession
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all protein sequences that have the Pfam accession **PF13509**
+
+::: {.callout-note collapse="true" appearance="simple"}
+## Show me the solution
+```sql
+SELECT *
+FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_pfam.parquet'
+WHERE pfam_accession = 13509;
+```
+:::
+
+
+::::
+
+
 ```{ojs}
 //| echo: false
 db = DuckDBClient.of({})
@@ -272,7 +369,7 @@ console1_ui = html`<div class="query-container">
     style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"
   >SELECT *
 FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'
-WHERE protein_id = 9395360842;</textarea>
+WHERE protein_id=9395360842;</textarea>
 </div>`
 
 console1_setup = {
@@ -295,75 +392,5 @@ console1_result = {
 
 console1_result === null
   ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>`
-  : Inputs.table(console1_result, { format: { protein_id: x => x } })
+  : Inputs.table(console1_result, { format: { protein_id: x => x, occurrence_id: x => x, study_id: x => x, assembly_id: x => x, contig_id: x => x, cluster_rep: x => x, pfam_accession: x => x } })
 ```
-
-```{ojs}
-//| echo: false
-mutable console2_sql = null
-mutable console2_clicks = 0
-
-console2_ui = html`<div class="query-container">
-  <label style="display: flex; justify-content: space-between; align-items: center;">
-    <span>Another Query</span>
-    <button class="run-query-btn" id="runBtn_console2">Run Query</button>
-  </label>
-  <textarea
-    id="sqlTextarea_console2"
-    rows="6"
-    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"
-  >SELECT COUNT(*) FROM 'https://...';</textarea>
-</div>`
-
-console2_setup = {
-  const btn = document.getElementById("runBtn_console2");
-  const textarea = document.getElementById("sqlTextarea_console2");
-  if (btn && textarea) {
-    btn.onclick = () => {
-      mutable console2_sql = textarea.value;
-      mutable console2_clicks = console2_clicks + 1;
-    };
-  }
-  return null;
-}
-
-console2_result = {
-  if (console2_sql === null) return null;
-  console2_clicks;
-  return db.query(console2_sql);
-}
-
-console2_result === null
-  ? html`<p style="color: #6c757d; font-style: italic;">Click "Run Query" to execute the DuckDB query above.</p>`
-  : Inputs.table(console2_result, { format: { protein_id: x => x } })
-```
-
-
-<!-- :::: {.panel-tabset}
-
-## Exercise
-```fasta
->test
-ATCG
-```
-
-## Hints
-Consider using the `filter()` function from `dplyr`.
-
-```fasta
-starwars |> filter(______)
-```
-
-## Solution
-
-Use the `filter()` function from `dplyr`:
-
-```fasta
-starwars |>                                 #<1>
-    filter(species == "Droid")              #<2>
-```
-1. Take the `starwars` dataset, and then,
-2. Filter for the "Droid" species.
-
-:::: -->
-
