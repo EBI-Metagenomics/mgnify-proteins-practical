@@ -20,20 +20,11 @@ bibliography: references.bib
 
 ## Introduction {#sec-introduction}
 
-The MGnify Proteins database aggregates 5.7 billion non-redundant protein sequences from the outputs of the MGnify Assembly Analysis Pipeline. The database connects these sequences to the metadata of the assemblies they originate from. These connections create a resource that can be exploited not only for its massive sequence space, but also for the insight it offers into how sequences relate to their biomes of origin, among other things.
+![MGnify Proteins overview schematic](images/mgnify_proteins_schematic.png){width=60%}
 
-In this practical, you will learn how to access the data for the latest MGnify Proteins release in three different ways. First, for a given sequence of interest, you will use the HMMER Web sequence search tool to retrieve sequences with similar sequence profiles. The resulting list of sequences can then be explored in detail using their respective protein detail pages. Finally, for larger and programmatic access of MGnify Proteins, you will see three examples of how the Parquet files that make up the release can be queried using modern tools like DuckDB.
+The MGnify Proteins database aggregates 5.7 billion non-redundant protein sequences from the outputs of the [MGnify Assembly Analysis Pipeline](https://www.ebi.ac.uk/metagenomics/pipelines/6#assembly). The database connects these sequences to the metadata of the assemblies and studies they originate from. These connections create a resource that can be exploited not only for its massive sequence space, but also for the insight it offers into how sequences relate to their biomes of origin, among other things.
 
-#### Learning outcomes
-
-**TODO: reword some of these**
-
-- How MGnify Proteins is generated from MGnify analyses
-- How to use HMMER Web to search for sequences with similar sequence profiles in MGnify Proteins
-- How to explore the Protein Landing Pages to gather information about different MGnify Protein sequences
-- How to perform basic querying of the MGnify Proteins release Parquet files for larger-scale data retrieval
-
-
+In this practical, you will learn how to access the data for the latest MGnify Proteins release in three different ways. First, for a given sequence of interest, you will use the HMMER Web sequence search tool to retrieve sequences with similar sequence profiles. The resulting list of sequences can then be explored in detail using their respective protein detail pages. Finally, for programmatic access of MGnify Proteins, you will see how you can query the MGnify Proteins API, and four examples of how the Parquet files that make up the release can be queried using modern tools like DuckDB.
 
 ## MGnify Proteins website overview
 
