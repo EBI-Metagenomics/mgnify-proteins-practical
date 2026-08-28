@@ -169,6 +169,9 @@ div.csl-indent {
 
 
 
+<div class="hidden">
+<p><img src="images/mgnify_logo_vf2.svg" class="img-fluid"> <img src="images/embl_ebi_logo.svg" class="img-fluid"></p>
+</div>
 <section id="sec-introduction" class="level2">
 <h2 class="anchored" data-anchor-id="sec-introduction">Introduction</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -721,7 +724,7 @@ Important
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="436" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 435;"><span id="cb8-436"><a href="#cb8-436" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="441" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 440;"><span id="cb8-441"><a href="#cb8-441" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -729,44 +732,44 @@ Important
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="442" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 441;"><span id="cb9-442"><a href="#cb9-442" aria-hidden="true" tabindex="-1"></a>mutable console1_sql <span class="op">=</span> <span class="kw">null</span></span>
-<span id="cb9-443"><a href="#cb9-443" aria-hidden="true" tabindex="-1"></a>mutable console1_clicks <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-444"><a href="#cb9-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-445"><a href="#cb9-445" aria-hidden="true" tabindex="-1"></a>console1_ui <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="query-container"&gt;</span></span>
-<span id="cb9-446"><a href="#cb9-446" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;label style="display: flex; justify-content: space-between; align-items: center;"&gt;</span></span>
-<span id="cb9-447"><a href="#cb9-447" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;DuckDB Query&lt;/span&gt;</span></span>
-<span id="cb9-448"><a href="#cb9-448" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class="run-query-btn" id="runBtn_console1"&gt;Run Query&lt;/button&gt;</span></span>
-<span id="cb9-449"><a href="#cb9-449" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/label&gt;</span></span>
-<span id="cb9-450"><a href="#cb9-450" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;textarea</span></span>
-<span id="cb9-451"><a href="#cb9-451" aria-hidden="true" tabindex="-1"></a><span class="vs">    id="sqlTextarea_console1"</span></span>
-<span id="cb9-452"><a href="#cb9-452" aria-hidden="true" tabindex="-1"></a><span class="vs">    rows="6"</span></span>
-<span id="cb9-453"><a href="#cb9-453" aria-hidden="true" tabindex="-1"></a><span class="vs">    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"</span></span>
-<span id="cb9-454"><a href="#cb9-454" aria-hidden="true" tabindex="-1"></a><span class="vs">  &gt;SELECT *</span></span>
-<span id="cb9-455"><a href="#cb9-455" aria-hidden="true" tabindex="-1"></a><span class="vs">FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span></span>
-<span id="cb9-456"><a href="#cb9-456" aria-hidden="true" tabindex="-1"></a><span class="vs">WHERE protein_id=9395360842;&lt;/textarea&gt;</span></span>
-<span id="cb9-457"><a href="#cb9-457" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span></span>
-<span id="cb9-458"><a href="#cb9-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-459"><a href="#cb9-459" aria-hidden="true" tabindex="-1"></a>console1_setup <span class="op">=</span> {</span>
-<span id="cb9-460"><a href="#cb9-460" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> btn <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"runBtn_console1"</span>)<span class="op">;</span></span>
-<span id="cb9-461"><a href="#cb9-461" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> textarea <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"sqlTextarea_console1"</span>)<span class="op">;</span></span>
-<span id="cb9-462"><a href="#cb9-462" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (btn <span class="op">&amp;&amp;</span> textarea) {</span>
-<span id="cb9-463"><a href="#cb9-463" aria-hidden="true" tabindex="-1"></a>    btn<span class="op">.</span><span class="at">onclick</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb9-464"><a href="#cb9-464" aria-hidden="true" tabindex="-1"></a>      mutable console1_sql <span class="op">=</span> textarea<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
-<span id="cb9-465"><a href="#cb9-465" aria-hidden="true" tabindex="-1"></a>      mutable console1_clicks <span class="op">=</span> console1_clicks <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-466"><a href="#cb9-466" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
-<span id="cb9-467"><a href="#cb9-467" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-468"><a href="#cb9-468" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb9-469"><a href="#cb9-469" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-470"><a href="#cb9-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-471"><a href="#cb9-471" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">=</span> {</span>
-<span id="cb9-472"><a href="#cb9-472" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (console1_sql <span class="op">===</span> <span class="kw">null</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb9-473"><a href="#cb9-473" aria-hidden="true" tabindex="-1"></a>  console1_clicks<span class="op">;</span></span>
-<span id="cb9-474"><a href="#cb9-474" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> db<span class="op">.</span><span class="fu">query</span>(console1_sql)<span class="op">;</span></span>
-<span id="cb9-475"><a href="#cb9-475" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-476"><a href="#cb9-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-477"><a href="#cb9-477" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">===</span> <span class="kw">null</span></span>
-<span id="cb9-478"><a href="#cb9-478" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;p style="color: #6c757d; font-style: italic;"&gt;Click "Run Query" to execute the DuckDB query above.&lt;/p&gt;`</span></span>
-<span id="cb9-479"><a href="#cb9-479" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> Inputs<span class="op">.</span><span class="fu">table</span>(console1_result<span class="op">,</span> { <span class="dt">format</span><span class="op">:</span> { <span class="dt">protein_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">occurrence_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">study_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">assembly_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">contig_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">cluster_rep</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">pfam_accession</span><span class="op">:</span> x <span class="kw">=&gt;</span> x } })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="447" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 446;"><span id="cb9-447"><a href="#cb9-447" aria-hidden="true" tabindex="-1"></a>mutable console1_sql <span class="op">=</span> <span class="kw">null</span></span>
+<span id="cb9-448"><a href="#cb9-448" aria-hidden="true" tabindex="-1"></a>mutable console1_clicks <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-449"><a href="#cb9-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-450"><a href="#cb9-450" aria-hidden="true" tabindex="-1"></a>console1_ui <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="query-container"&gt;</span></span>
+<span id="cb9-451"><a href="#cb9-451" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;label style="display: flex; justify-content: space-between; align-items: center;"&gt;</span></span>
+<span id="cb9-452"><a href="#cb9-452" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;DuckDB Query&lt;/span&gt;</span></span>
+<span id="cb9-453"><a href="#cb9-453" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class="run-query-btn" id="runBtn_console1"&gt;Run Query&lt;/button&gt;</span></span>
+<span id="cb9-454"><a href="#cb9-454" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/label&gt;</span></span>
+<span id="cb9-455"><a href="#cb9-455" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;textarea</span></span>
+<span id="cb9-456"><a href="#cb9-456" aria-hidden="true" tabindex="-1"></a><span class="vs">    id="sqlTextarea_console1"</span></span>
+<span id="cb9-457"><a href="#cb9-457" aria-hidden="true" tabindex="-1"></a><span class="vs">    rows="6"</span></span>
+<span id="cb9-458"><a href="#cb9-458" aria-hidden="true" tabindex="-1"></a><span class="vs">    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"</span></span>
+<span id="cb9-459"><a href="#cb9-459" aria-hidden="true" tabindex="-1"></a><span class="vs">  &gt;SELECT *</span></span>
+<span id="cb9-460"><a href="#cb9-460" aria-hidden="true" tabindex="-1"></a><span class="vs">FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span></span>
+<span id="cb9-461"><a href="#cb9-461" aria-hidden="true" tabindex="-1"></a><span class="vs">WHERE protein_id=9395360842;&lt;/textarea&gt;</span></span>
+<span id="cb9-462"><a href="#cb9-462" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span></span>
+<span id="cb9-463"><a href="#cb9-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-464"><a href="#cb9-464" aria-hidden="true" tabindex="-1"></a>console1_setup <span class="op">=</span> {</span>
+<span id="cb9-465"><a href="#cb9-465" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> btn <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"runBtn_console1"</span>)<span class="op">;</span></span>
+<span id="cb9-466"><a href="#cb9-466" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> textarea <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"sqlTextarea_console1"</span>)<span class="op">;</span></span>
+<span id="cb9-467"><a href="#cb9-467" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (btn <span class="op">&amp;&amp;</span> textarea) {</span>
+<span id="cb9-468"><a href="#cb9-468" aria-hidden="true" tabindex="-1"></a>    btn<span class="op">.</span><span class="at">onclick</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-469"><a href="#cb9-469" aria-hidden="true" tabindex="-1"></a>      mutable console1_sql <span class="op">=</span> textarea<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
+<span id="cb9-470"><a href="#cb9-470" aria-hidden="true" tabindex="-1"></a>      mutable console1_clicks <span class="op">=</span> console1_clicks <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-471"><a href="#cb9-471" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb9-472"><a href="#cb9-472" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-473"><a href="#cb9-473" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb9-474"><a href="#cb9-474" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-475"><a href="#cb9-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-476"><a href="#cb9-476" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">=</span> {</span>
+<span id="cb9-477"><a href="#cb9-477" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (console1_sql <span class="op">===</span> <span class="kw">null</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb9-478"><a href="#cb9-478" aria-hidden="true" tabindex="-1"></a>  console1_clicks<span class="op">;</span></span>
+<span id="cb9-479"><a href="#cb9-479" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> db<span class="op">.</span><span class="fu">query</span>(console1_sql)<span class="op">;</span></span>
+<span id="cb9-480"><a href="#cb9-480" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-481"><a href="#cb9-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-482"><a href="#cb9-482" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">===</span> <span class="kw">null</span></span>
+<span id="cb9-483"><a href="#cb9-483" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;p style="color: #6c757d; font-style: italic;"&gt;Click "Run Query" to execute the DuckDB query above.&lt;/p&gt;`</span></span>
+<span id="cb9-484"><a href="#cb9-484" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> Inputs<span class="op">.</span><span class="fu">table</span>(console1_result<span class="op">,</span> { <span class="dt">format</span><span class="op">:</span> { <span class="dt">protein_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">occurrence_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">study_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">assembly_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">contig_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">cluster_rep</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">pfam_accession</span><span class="op">:</span> x <span class="kw">=&gt;</span> x } })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
