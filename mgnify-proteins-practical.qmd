@@ -18,6 +18,11 @@ bibliography: references.bib
 
 ---
 
+::: {.hidden}
+![](images/mgnify_logo_vf2.svg)
+![](images/embl_ebi_logo.svg)
+:::
+
 ## Introduction {#sec-introduction}
 
 ![MGnify Proteins overview schematic](images/mgnify_proteins_schematic.png){width=60%}
