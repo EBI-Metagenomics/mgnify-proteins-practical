@@ -95,7 +95,23 @@ HMMER is an algorithm for performing searches against a target sequence database
 
 ![**Figure 2.** The bottom half of the MGnify Proteins website main page, with an input form for running HMMER sequence search on MGnify Proteins data. **A)** To run HMMER, input a query sequence for which you want to find similar hits within MGnify Proteins in this text box. An example input can be displayed by clicking on `example` above the text box. **B)** You can choose between three subsets of the MGnify30 clustering of the database here. **C)** You can modify some of the basic search parameters for HMMER here if necessary for your use case e.g. more strict searching criteria, although for most cases the default values should be fine.](images/mgnify_proteins_website_bottom.png){width=100%}
 
-Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - **A)** - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - **B)** - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - **C)** - some of the adjustable parameters while running HMMER are displayed. The default settings are good enough to get high homology hits, and should therefore suit most cases. However, if you need more stringent search parameters for your use case, lowering the E-value thresholds can help achieve this.
+Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - **A)** - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - **B)** - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - **C)** - some of the adjustable HMMER search parameters are displayed, and can be modified.
+
+:::: {.panel-tabset}
+
+## Question
+
+The default HMMER search settings are good enough to get high homology hits, and should suit most cases. However, if you needed more stringent search results, what would be the easiest parameter to alter to achieve this, and how would you change it?
+
+## Hint
+
+If you have not worked with this kind of sequence tool before, the HMMER Web documentation for its thresholds can be found [here](https://hmmer-web-docs.readthedocs.io/en/latest/searches.html#thresholds).
+
+## Answer
+
+If you need more stringent search parameters for your use case, **lowering the E-value thresholds can help achieve this**. For example, you could set the sequence E-value to 0.00001 and the hit E-value to 0.00003. This change will result in a set of matches that are higher confidence due to the stricter E-value thresholds.
+::::
+
 
 For this part of the practical, we will work with this sequence:
 
@@ -111,7 +127,7 @@ MRKYVRYYRDFVLELNKALAADPRIEICMLPVGDGITICRRIS
 Specifically, this sequence is a methyltransferase enzyme with the Uniprot accession [O49499](https://www.uniprot.org/uniprotkb/O49499). Imagine this was your sequence of interest, and copy paste it into the textbox. We will keep the default database (**MGnify30-C2**) and parameters for this search. Once you've pasted the sequence into the textbox, click on the **Search** button.
 
 :::{.callout-note}
-We pasted the sequence in FASTA format, but you can just paste the sequence as is without the `>` header.
+We pasted the sequence in FASTA format, but you can also just paste the sequence as is without the `>` header.
 :::
 
 ### Understanding HMMER results
@@ -120,9 +136,23 @@ After waiting about a minute, you will be redirected to a webpage containing the
 
 ![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More detail about a match can be found by clicking on the arrow here, including the full alignment.](images/mgnify_proteins_hmmer_results.png){width=100%}
 
-The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for "O-methyltransferase". That Pfam matches what we know about our query sequence from its Uniprot entry, which is good!
+The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for `O-methyltransferase`. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!
 
-Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match. The table is sorted by E-value in descending order, and the lower the E-value the higher confidence we can have in the match! That means that first MGYP, **MGYP002778845309**, is the highest confidence match to our query target.
+Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.
+
+:::: {.panel-tabset}
+
+## Question
+
+Given the results in table, which MGYP would you consider the best match to our query sequence, and why?
+
+## Answer
+
+The first MGYP in the table - `MGYP002778845309` - can be considered the best match. This is because the table is sorted in descending order by E-value, and the lower the E-value the higher confidence we have in the match.
+
+::::
+
+
 
 We can see some more details about this match by clicking on the arrow on the leftmost side of the row (**C**). This expands the row, reveals the sequence alignment between the query and the target, and shows a new table with further information about this alignment.
 
@@ -132,24 +162,48 @@ Documentation about this expanded view can be found [here](https://hmmer-web-doc
 
 ## Protein detail pages
 
-Every cluster representative has a protein detail page, which contains information about that particular MGYP. It's possible to go straight to an MGYP's landing page from the HMMER result by clicking on the target MGYP, but it's also possible to write the MGYP accession into the text box at the top of the MGnify Proteins' main page, as mentioned [previously](#sec-mgyp-accessions).
+On the MGnify Proteins website, every cluster representative has a protein detail page, which contains information about that particular MGYP. It's possible to go straight to an MGYP's landing page from the HMMER result by clicking on the target MGYP, but it's also possible to write the MGYP accession into the text box at the top of the MGnify Proteins' main page, as mentioned [previously](#sec-mgyp-accessions).
 
-As we have a results page open, let's click on the best hit (**MGYP002778845309**) to open its [detail page](https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/). The detail page has multiple sections with useful information that we will go through, starting with its top half:
+As we have a results page open, let's click on the best hit (`MGYP002778845309`) to open its [detail page](https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/). The detail page has multiple sections with useful information that we will go through, starting with its top half.
 
 ### Cluster, biome, & Pfam information
 
 ![**Figure 4.** The top half of a MGnify90 detail page. **A)** You can see how many MGYPs are within the cluster represented by this representative - in this case seven. You can also see whether the representative is a full-length protein - in this case it is, as per the checked box. **B)** As every sequence in MGnify Proteins is sourced from at least one biome-tagged assembly, we can display the different biomes the cluster representative was found in. In the case of this representative, it was found in one biome: freshwater. **C)** If the cluster representative has at least one Pfam annotation, they will be displayed in this table. The different annotations are also displayed on the interactive sequence viewer at the bottom, so that you can see where the annotations lie on the sequence. ](images/mgnify_proteins_protein_detail_top.png){width=100%}
 
 
-All of the MGnify90 cluster representatives have a detail page like this one. First of all, we can see how many protein sequences are represented by this MGYP, and therefore sit within its cluster (**A**). This cluster is made up of seven proteins, including the representative. In the same section, you can see whether the cluster representative is either a full-length sequence, or a partial fragment. In this case, the MGYP is a full-length sequence, as shown by the checked box. If it were a partial fragment, it would be represented by an **X**.
+All ~1.6 billion  MGnify90 cluster representatives have a detail page like this one. First of all, we can see how many protein sequences are represented by this MGYP, and therefore sit within its cluster (**A**). This cluster for example is made up of seven proteins, including the representative. In the same section, you can see whether the cluster representative is either a full-length sequence, or a partial fragment. In this case, the MGYP is a full-length sequence, as shown by the checked box. If it were a partial fragment, it would be represented by an **X**.
 
-As discussed in the [introduction](#sec-introduction), every sequence in MGnify Proteins originally comes from analysed assemblies, and every assembly comes from a biome-tagged study. Therefore, in MGnify Proteins, we propagate the biome label down from the study, to the assembly, and finally to the MGYP. In this section, we can see all of the biomes this particular MGYP was found in. In this case, the MGYP was only found in a freshwater environment, and only once.
+As discussed in the [introduction](#sec-introduction), every sequence in MGnify Proteins originally comes from analysed assemblies, and every assembly comes from a biome-tagged study. We therefore propagate the biome label down from the study, to the assembly, and finally to the MGYP to tag. In this section of the detail page, we can see all of the biomes this particular MGYP was found in. In this case, the MGYP was only found in a freshwater environment, and only once.
 
 :::{.callout-note}
 As MGYPs can be found in multiple assemblies, it is possible to have for an MGYP to be found multiple times in various biomes. That's why this section does not just show the individual biome - freshwater - but also how many times it was found in freshwater.
 :::
 
 Finally, similar to the HMMER results, we can see how many Pfam accessions were found on the MGYP, along with information on the position of each accession (**C**) and confidence metrics like E-value. Below this table, there is also an interactive sequence viewer that allows you to see where exactly each Pfam accession is on the sequence.
+
+
+:::: {.panel-tabset}
+
+## Question
+
+For the second best HMMER search match (`MGYP010718956982`), figure out:
+
+- How many proteins are within its cluster
+- Whether the MGYP is a full-length sequence or not
+- How many unique biomes the MGYP was found in
+- Which Pfam accessions (if any) overlap with the best match's (`MGYP002778845309`) set of Pfam accessions
+
+## Answer
+
+The answers are:
+
+- Just one - itself. This cluster is therefore what we call a "singleton"
+- It isn't a full-length sequence, as can be seen from the **X**
+- It's also found in just one biome: Plants
+- The MGYP has two Pfam accessions (PF01596 and PF13578), and both also exist in the best hit
+
+::::
+
 
 :::{.callout-note}
 You can interact with the sequence viewer by zooming in, zooming out, and dragging it around.
@@ -161,14 +215,14 @@ As you scroll down from here, we have three more sections of interest in the bot
 
 ![**Figure 5.** The bottom half of a MGnify90 detail page. **A)** Almost half of the cluster representatives (772 million) have a tertiary structure, which were predicted by ESMFold in 2023 for the ESM Metagenomic Atlas. If an MGYP has a structure, it will can be viewed and interacted with here. **B)** You can find metadata about an MGYP's source here, including all studies, asssemblies, and contigs it was found in. **C)** The sequence of the MGYP can be viewed and copied here.](images/mgnify_proteins_protein_detail_bottom.png){width=80%}
 
-In 2023, Meta generated tertiary structures using their tool ESMFold for all of the MGnify Protein cluster representatives available at the time. This effort resulted in 772 million tertiary structures for MGnify Proteins, which populated the [ESM metagenomic Atlas](https://esmatlas.com/) [-@lin2023evolutionary]. For cluster representatives that have a tertiary structure, they are displayed on their detail page (**A**). This display is interactive, and is powered by Mol* [-@sehnal2021mol].
+In 2023, Meta generated tertiary structures using their tool ESMFold for all of the MGnify Protein cluster representatives available at the time. This effort resulted in 772 million tertiary structures for MGnify Proteins, which populated the [ESM metagenomic Atlas](https://esmatlas.com/) [-@lin2023evolutionary]. Where possible, we therefore display the predicted tertiary structure of cluster representatives on their detail page (**A**). This display is interactive, and is powered by Mol* [-@sehnal2021mol].
 
 
 :::{.callout-warning}
-With the latest release (`2027_07`) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for almost half of the cluster representatives. There will therefore be cases where an MGYP's detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.
+With the latest release (`2027_07`) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for the cluster representatives of the older `2024_04` release, which is almost half of them. There will therefore be cases where an MGYP's detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.
 :::
 
-The page also contains a table containing further metadata about the MGYP (**B**). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in for an assembly. If you're interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.
+The page also contains a table containing further metadata about the MGYP (**B**). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in from an assembly, and where on that contig it lies (start and end positions, and strand). If you're interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.
 
 :::{.callout-note}
 The study and assembly links are cross-referenced to their respective pages on the main MGnify website. Feel free to explore these links to see what else you can find out about the origin of this protein!
@@ -176,9 +230,21 @@ The study and assembly links are cross-referenced to their respective pages on t
 
 Finally, the primary sequence of the MGYP can be found at the bottom if its detail page (**C**). There is a copy button you can click if you want to paste it into anything you might need e.g. a fasta file, a different tool, or just your notes!
 
+:::: {.panel-tabset}
+
+## Question
+
+From `MGYP002778845309`'s detail page, go to the MGnify cross-reference for the assembly it was found in.Which version of the MGnify Assembly Analysis pipeline was run to find this protein?
+
+## Answer
+
+This protein was found after **version 4.1** of the analysis pipeline was run.
+::::
+
+
 ## Programmatic access of MGnify Proteins
 
-So far, we have seen how we can find data on MGnify Proteins by performing a HMMER sequence search, and by browsing the website. However, so far everything we have done has been manual and in the browser, which is not practical if your work requires more automatic data retrieval. To that end, in this section we will look at how we can access MGnify Proteins data in a programmatic way, in two different ways.
+So far, we've seen how we can find data on MGnify Proteins by performing a HMMER sequence search, and by browsing the website. However, so far everything we have done has been manual and in the browser, which is not practical if your work requires more automatic data retrieval. To that end, in this section we will look at how we can access MGnify Proteins data in a programmatic way, in two different ways.
 
 ### Accessing MGnify90 using the Proteins API
 
@@ -193,7 +259,8 @@ Have a look at this Python example of how you can query the API's protein detail
 #| autorun: false
 import requests
 
-protein_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein"
+# TODO: change this to the prod URL once changes are deployed
+protein_endpoint = "https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein"
 
 mgyp = "MGYP002778845309"
 res = requests.get(
@@ -214,20 +281,29 @@ for biome in res["biomes"]:
   print(biome["name"])
 ```
 
-Have a go at querying a different MGYP from the HMMER search results we generated earlier!
-
 :::{.callout-note}
 The API exposes the same data that is present on the MGnify Proteins website. That means only the MGnify90 cluster representatives are queryable using this method.
 :::
 
+:::{.callout-tip}
+
+## Task
+
+Have a go at querying a different MGYP from the HMMER search results we generated earlier.
+
+:::
+
+
+
 #### Protein search endpoint
 
-If you want to search for an attribute of a protein rather than finding a specific MGYP e.g. a specific biome or PFAM accession, you can use the protein search endpoint. For example, to grab 5 MGYPs with the Wastewater biome:
+If you want to search for an attribute of a protein rather than finding a specific MGYP e.g. a specific biome or Pfam accession, you can use the protein search endpoint. For example, to grab five MGYPs with the Wastewater biome:
 
 ```{pyodide}
 import requests
 
-protein_search_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein/search"
+# TODO: change this to the prod URL once changes are deployed
+protein_search_endpoint = "https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein/search"
 
 biome_string = "root:Engineered:Wastewater"
 mgyp_count = 5
@@ -241,11 +317,19 @@ print(res)
 
 These MGYPs could then be searched programmatically with the detail endpoint we went through earlier!
 
+:::{.callout-tip}
+
+## Task
+
 Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession **PF01596**.
+
+:::
+
+
 
 ### Accessing all of MGnify Proteins with the release Parquet files
 
-So far we've looked at how we can access MGnify90 data. However, MGnify90 contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.
+So far we've looked at how we can access MGnify90 data. However, MGnify90 only contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.
 
 There are programmatic ways of accessing this data, by downloading the latest release files. You can see the full release on our [FTP](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/). The `README.md` [file](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) in the FTP gives an in-depth description of the release files. As you can see, the release is mostly made up of flat files like .tsv and .fasta files. You can download and parse these, however **we highly recommend you instead use the equivalent .parquet files**. As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of the full MGnify Proteins release files due to numerous advantages:
 
