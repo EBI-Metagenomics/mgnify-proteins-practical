@@ -3,14 +3,17 @@ body {
 }
 
 .quarto-title-banner {
-  background-size: 300px auto !important;
-  background-position: 20px center !important;
-  background-repeat: no-repeat !important;
+  background-image: url('images/mgnify_logo_vf2.svg'), url('images/embl_ebi_logo.svg') !important;
+  background-size: 300px auto, 300px auto !important;
+  background-position: 20px center, calc(100% - 20px) center !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-color: #DFF6F2 !important;
 }
 
 .quarto-title-banner .quarto-title h1,
 .quarto-title-banner .title {
   color: black !important;
+  text-align: center !important;
 }
 
 /* FASTA code block styling */

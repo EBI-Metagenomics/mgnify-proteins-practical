@@ -284,7 +284,21 @@ Note
 <figcaption><strong>Figure 2.</strong> The bottom half of the MGnify Proteins website main page, with an input form for running HMMER sequence search on MGnify Proteins data. <strong>A)</strong> To run HMMER, input a query sequence for which you want to find similar hits within MGnify Proteins in this text box. An example input can be displayed by clicking on <code>example</code> above the text box. <strong>B)</strong> You can choose between three subsets of the MGnify30 clustering of the database here. <strong>C)</strong> You can modify some of the basic search parameters for HMMER here if necessary for your use case e.g.&nbsp;more strict searching criteria, although for most cases the default values should be fine.</figcaption>
 </figure>
 </div>
-<p>Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - <strong>A)</strong> - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - <strong>B)</strong> - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - <strong>C)</strong> - some of the adjustable parameters while running HMMER are displayed. The default settings are good enough to get high homology hits, and should therefore suit most cases. However, if you need more stringent search parameters for your use case, lowering the E-value thresholds can help achieve this.</p>
+<p>Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - <strong>A)</strong> - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - <strong>B)</strong> - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - <strong>C)</strong> - some of the adjustable HMMER search parameters are displayed, and can be modified.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Hint</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>The default HMMER search settings are good enough to get high homology hits, and should suit most cases. However, if you needed more stringent search results, what would be the easiest parameter to alter to achieve this, and how would you change it?</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>If you have not worked with this kind of sequence tool before, the HMMER Web documentation for its thresholds can be found <a href="https://hmmer-web-docs.readthedocs.io/en/latest/searches.html#thresholds">here</a>.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>If you need more stringent search parameters for your use case, <strong>lowering the E-value thresholds can help achieve this</strong>. For example, you could set the sequence E-value to 0.00001 and the hit E-value to 0.00003. This change will result in a set of matches that are higher confidence due to the stricter E-value thresholds.</p>
+</div>
+</div>
+</div>
 <p>For this part of the practical, we will work with this sequence:</p>
 <pre class="fasta"><code>&gt;O49499
 MATTTTEATKTSSTNGEDQKQSQNLRHQEVGHKSLLQSDDLYQYILETSVYPRE
@@ -303,7 +317,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We pasted the sequence in FASTA format, but you can just paste the sequence as is without the <code>&gt;</code> header.</p>
+<p>We pasted the sequence in FASTA format, but you can also just paste the sequence as is without the <code>&gt;</code> header.</p>
 </div>
 </div>
 </section>
@@ -316,8 +330,19 @@ Note
 <figcaption><strong>Figure 3.</strong> The HMMER results page. <strong>A)</strong> This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name “Methyltransf_3”. <strong>B)</strong> At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. <strong>C)</strong> More detail about a match can be found by clicking on the arrow here, including the full alignment.</figcaption>
 </figure>
 </div>
-<p>The result page is organised into two major sections, with the first (<strong>A</strong>) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e.&nbsp;the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: <a href="https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/">PF01596</a>, which stands for “O-methyltransferase”. That Pfam matches what we know about our query sequence from its Uniprot entry, which is good!</p>
-<p>Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (<strong>B</strong>). For each matching MGYP i.e.&nbsp;the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match. The table is sorted by E-value in descending order, and the lower the E-value the higher confidence we can have in the match! That means that first MGYP, <strong>MGYP002778845309</strong>, is the highest confidence match to our query target.</p>
+<p>The result page is organised into two major sections, with the first (<strong>A</strong>) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e.&nbsp;the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: <a href="https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/"><code>PF01596</code></a>, which stands for <code>O-methyltransferase</code>. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!</p>
+<p>Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (<strong>B</strong>). For each matching MGYP i.e.&nbsp;the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Given the results in table, which MGYP would you consider the best match to our query sequence, and why?</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>The first MGYP in the table - <code>MGYP002778845309</code> - can be considered the best match. This is because the table is sorted in descending order by E-value, and the lower the E-value the higher confidence we have in the match.</p>
+</div>
+</div>
+</div>
 <p>We can see some more details about this match by clicking on the arrow on the leftmost side of the row (<strong>C</strong>). This expands the row, reveals the sequence alignment between the query and the target, and shows a new table with further information about this alignment.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -336,8 +361,8 @@ Note
 </section>
 <section id="protein-detail-pages" class="level2">
 <h2 class="anchored" data-anchor-id="protein-detail-pages">Protein detail pages</h2>
-<p>Every cluster representative has a protein detail page, which contains information about that particular MGYP. It’s possible to go straight to an MGYP’s landing page from the HMMER result by clicking on the target MGYP, but it’s also possible to write the MGYP accession into the text box at the top of the MGnify Proteins’ main page, as mentioned <a href="#sec-mgyp-accessions">previously</a>.</p>
-<p>As we have a results page open, let’s click on the best hit (<strong>MGYP002778845309</strong>) to open its <a href="https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/">detail page</a>. The detail page has multiple sections with useful information that we will go through, starting with its top half:</p>
+<p>On the MGnify Proteins website, every cluster representative has a protein detail page, which contains information about that particular MGYP. It’s possible to go straight to an MGYP’s landing page from the HMMER result by clicking on the target MGYP, but it’s also possible to write the MGYP accession into the text box at the top of the MGnify Proteins’ main page, as mentioned <a href="#sec-mgyp-accessions">previously</a>.</p>
+<p>As we have a results page open, let’s click on the best hit (<code>MGYP002778845309</code>) to open its <a href="https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/">detail page</a>. The detail page has multiple sections with useful information that we will go through, starting with its top half.</p>
 <section id="cluster-biome-pfam-information" class="level3">
 <h3 class="anchored" data-anchor-id="cluster-biome-pfam-information">Cluster, biome, &amp; Pfam information</h3>
 <div class="quarto-figure quarto-figure-center">
@@ -346,8 +371,8 @@ Note
 <figcaption><strong>Figure 4.</strong> The top half of a MGnify90 detail page. <strong>A)</strong> You can see how many MGYPs are within the cluster represented by this representative - in this case seven. You can also see whether the representative is a full-length protein - in this case it is, as per the checked box. <strong>B)</strong> As every sequence in MGnify Proteins is sourced from at least one biome-tagged assembly, we can display the different biomes the cluster representative was found in. In the case of this representative, it was found in one biome: freshwater. <strong>C)</strong> If the cluster representative has at least one Pfam annotation, they will be displayed in this table. The different annotations are also displayed on the interactive sequence viewer at the bottom, so that you can see where the annotations lie on the sequence.</figcaption>
 </figure>
 </div>
-<p>All of the MGnify90 cluster representatives have a detail page like this one. First of all, we can see how many protein sequences are represented by this MGYP, and therefore sit within its cluster (<strong>A</strong>). This cluster is made up of seven proteins, including the representative. In the same section, you can see whether the cluster representative is either a full-length sequence, or a partial fragment. In this case, the MGYP is a full-length sequence, as shown by the checked box. If it were a partial fragment, it would be represented by an <strong>X</strong>.</p>
-<p>As discussed in the <a href="#sec-introduction">introduction</a>, every sequence in MGnify Proteins originally comes from analysed assemblies, and every assembly comes from a biome-tagged study. Therefore, in MGnify Proteins, we propagate the biome label down from the study, to the assembly, and finally to the MGYP. In this section, we can see all of the biomes this particular MGYP was found in. In this case, the MGYP was only found in a freshwater environment, and only once.</p>
+<p>All ~1.6 billion MGnify90 cluster representatives have a detail page like this one. First of all, we can see how many protein sequences are represented by this MGYP, and therefore sit within its cluster (<strong>A</strong>). This cluster for example is made up of seven proteins, including the representative. In the same section, you can see whether the cluster representative is either a full-length sequence, or a partial fragment. In this case, the MGYP is a full-length sequence, as shown by the checked box. If it were a partial fragment, it would be represented by an <strong>X</strong>.</p>
+<p>As discussed in the <a href="#sec-introduction">introduction</a>, every sequence in MGnify Proteins originally comes from analysed assemblies, and every assembly comes from a biome-tagged study. We therefore propagate the biome label down from the study, to the assembly, and finally to the MGYP to tag. In this section of the detail page, we can see all of the biomes this particular MGYP was found in. In this case, the MGYP was only found in a freshwater environment, and only once.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -362,6 +387,29 @@ Note
 </div>
 </div>
 <p>Finally, similar to the HMMER results, we can see how many Pfam accessions were found on the MGYP, along with information on the position of each accession (<strong>C</strong>) and confidence metrics like E-value. Below this table, there is also an interactive sequence viewer that allows you to see where exactly each Pfam accession is on the sequence.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>For the second best HMMER search match (<code>MGYP010718956982</code>), figure out:</p>
+<ul>
+<li>How many proteins are within its cluster</li>
+<li>Whether the MGYP is a full-length sequence or not</li>
+<li>How many unique biomes the MGYP was found in</li>
+<li>Which Pfam accessions (if any) overlap with the best match’s (<code>MGYP002778845309</code>) set of Pfam accessions</li>
+</ul>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>The answers are:</p>
+<ul>
+<li>Just one - itself. This cluster is therefore what we call a “singleton”</li>
+<li>It isn’t a full-length sequence, as can be seen from the <strong>X</strong></li>
+<li>It’s also found in just one biome: Plants</li>
+<li>The MGYP has two Pfam accessions (<code>PF01596</code> and <code>PF13578</code>), which both also exist in the best hit</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -385,7 +433,7 @@ Note
 <figcaption><strong>Figure 5.</strong> The bottom half of a MGnify90 detail page. <strong>A)</strong> Almost half of the cluster representatives (772 million) have a tertiary structure, which were predicted by ESMFold in 2023 for the ESM Metagenomic Atlas. If an MGYP has a structure, it will can be viewed and interacted with here. <strong>B)</strong> You can find metadata about an MGYP’s source here, including all studies, asssemblies, and contigs it was found in. <strong>C)</strong> The sequence of the MGYP can be viewed and copied here.</figcaption>
 </figure>
 </div>
-<p>In 2023, Meta generated tertiary structures using their tool ESMFold for all of the MGnify Protein cluster representatives available at the time. This effort resulted in 772 million tertiary structures for MGnify Proteins, which populated the <a href="https://esmatlas.com/">ESM metagenomic Atlas</a> <span class="citation" data-cites="lin2023evolutionary">(<a href="#ref-lin2023evolutionary" role="doc-biblioref">2023</a>)</span>. For cluster representatives that have a tertiary structure, they are displayed on their detail page (<strong>A</strong>). This display is interactive, and is powered by Mol* <span class="citation" data-cites="sehnal2021mol">(<a href="#ref-sehnal2021mol" role="doc-biblioref">2021</a>)</span>.</p>
+<p>In 2023, Meta generated tertiary structures using their tool ESMFold for all of the MGnify Protein cluster representatives available at the time. This effort resulted in 772 million tertiary structures for MGnify Proteins, which populated the <a href="https://esmatlas.com/">ESM metagenomic Atlas</a> <span class="citation" data-cites="lin2023evolutionary">(<a href="#ref-lin2023evolutionary" role="doc-biblioref">2023</a>)</span>. Where possible, we therefore display the predicted tertiary structure of cluster representatives on their detail page (<strong>A</strong>). This display is interactive, and is powered by Mol* <span class="citation" data-cites="sehnal2021mol">(<a href="#ref-sehnal2021mol" role="doc-biblioref">2021</a>)</span>.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -396,10 +444,10 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>With the latest release (<code>2027_07</code>) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for almost half of the cluster representatives. There will therefore be cases where an MGYP’s detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.</p>
+<p>With the latest release (<code>2027_07</code>) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for the cluster representatives of the older <code>2024_04</code> release, which is almost half of them. There will therefore be cases where an MGYP’s detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.</p>
 </div>
 </div>
-<p>The page also contains a table containing further metadata about the MGYP (<strong>B</strong>). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in for an assembly. If you’re interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.</p>
+<p>The page also contains a table containing further metadata about the MGYP (<strong>B</strong>). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in from an assembly, and where on that contig it lies (start and end positions, and strand). If you’re interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -414,23 +462,34 @@ Note
 </div>
 </div>
 <p>Finally, the primary sequence of the MGYP can be found at the bottom if its detail page (<strong>C</strong>). There is a copy button you can click if you want to paste it into anything you might need e.g.&nbsp;a fasta file, a different tool, or just your notes!</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<p>From <code>MGYP002778845309</code>’s detail page, go to the MGnify cross-reference for the assembly it was found in.Which version of the MGnify Assembly Analysis pipeline was run to find this protein?</p>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<p>This protein was found after <strong>version 4.1</strong> of the analysis pipeline was run.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="programmatic-access-of-mgnify-proteins" class="level2">
 <h2 class="anchored" data-anchor-id="programmatic-access-of-mgnify-proteins">Programmatic access of MGnify Proteins</h2>
-<p>So far, we have seen how we can find data on MGnify Proteins by performing a HMMER sequence search, and by browsing the website. However, so far everything we have done has been manual and in the browser, which is not practical if your work requires more automatic data retrieval. To that end, in this section we will look at how we can access MGnify Proteins data in a programmatic way, in two different ways.</p>
+<p>So far, we’ve seen how we can find data on MGnify Proteins by performing a HMMER sequence search, and by browsing the website. However, so far everything we have done has been manual and in the browser, which is not practical if your work requires more automatic data retrieval. To that end, in this section we will look at how we can access MGnify Proteins data in a programmatic way, in two different ways.</p>
 <section id="accessing-mgnify90-using-the-proteins-api" class="level3">
 <h3 class="anchored" data-anchor-id="accessing-mgnify90-using-the-proteins-api">Accessing MGnify90 using the Proteins API</h3>
 <p>The same data that powers the protein detail pages on your browser is accessible as a simple API. Documentation for the API can be found <a href="https://www.ebi.ac.uk/metagenomics/proteins/api/v1/docs#/">here</a>.</p>
 <section id="protein-detail-endpoint" class="level4">
 <h4 class="anchored" data-anchor-id="protein-detail-endpoint">Protein detail endpoint</h4>
-<p>Have a look at this Python example of how you can query the API’s protein detail endpoint to retrieve the same data we were looking at earlier for <strong>MGYP002778845309</strong>:</p>
+<p>Have a look at this Python example of how you can query the API’s protein detail endpoint to retrieve the same data we were looking at earlier for <code>MGYP002778845309</code>:</p>
 <div>
 <div id="pyodide-1" class="exercise-cell">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCByZXF1ZXN0c1xuXG5wcm90ZWluX2VuZHBvaW50ID0gXCJodHRwczovL3d3dy5lYmkuYWMudWsvbWV0YWdlbm9taWNzL3Byb3RlaW5zL2FwaS92MS9wcm90ZWluXCJcblxubWd5cCA9IFwiTUdZUDAwMjc3ODg0NTMwOVwiXG5yZXMgPSByZXF1ZXN0cy5nZXQoXG4gIGZcIntwcm90ZWluX2VuZHBvaW50fS97bWd5cH1cIlxuKS5qc29uKClcblxucHJpbnQocmVzKSJ9
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCByZXF1ZXN0c1xuXG4jIFRPRE86IGNoYW5nZSB0aGlzIHRvIHRoZSBwcm9kIFVSTCBvbmNlIGNoYW5nZXMgYXJlIGRlcGxveWVkXG5wcm90ZWluX2VuZHBvaW50ID0gXCJodHRwczovL3d3d2Rldi5lYmkuYWMudWsvbWV0YWdlbm9taWNzL3Byb3RlaW5zL2FwaS92MS9wcm90ZWluXCJcblxubWd5cCA9IFwiTUdZUDAwMjc3ODg0NTMwOVwiXG5yZXMgPSByZXF1ZXN0cy5nZXQoXG4gIGZcIntwcm90ZWluX2VuZHBvaW50fS97bWd5cH1cIlxuKS5qc29uKClcblxucHJpbnQocmVzKSJ9
 </script>
 </div>
 <p>This code queries the API and returns a JSON response. This JSON response can easily be parsed as a Python dictionary to retrieve data. For example, to retrieve the sequence of this MGYP:</p>
@@ -451,7 +510,6 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQocmVzW1wic2VxdWVu
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIGJpb21lIGluIHJlc1tcImJpb21lc1wiXTpcbiAgcHJpbnQoYmlvbWVbXCJuYW1lXCJdKSJ9
 </script>
 </div>
-<p>Have a go at querying a different MGYP from the HMMER search results we generated earlier!</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -465,25 +523,50 @@ Note
 <p>The API exposes the same data that is present on the MGnify Proteins website. That means only the MGnify90 cluster representatives are queryable using this method.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Have a go at querying a different MGYP from the HMMER search results we generated earlier.</p>
+</div>
+</div>
 </section>
 <section id="protein-search-endpoint" class="level4">
 <h4 class="anchored" data-anchor-id="protein-search-endpoint">Protein search endpoint</h4>
-<p>If you want to search for an attribute of a protein rather than finding a specific MGYP e.g.&nbsp;a specific biome or PFAM accession, you can use the protein search endpoint. For example, to grab 5 MGYPs with the Wastewater biome:</p>
+<p>If you want to search for an attribute of a protein rather than finding a specific MGYP e.g.&nbsp;a specific biome or Pfam accession, you can use the protein search endpoint. For example, to grab five MGYPs with the Wastewater biome:</p>
 <div>
 <div id="pyodide-4" class="exercise-cell">
 
 </div>
 <script type="pyodide-4-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHJlcXVlc3RzXG5cbnByb3RlaW5fc2VhcmNoX2VuZHBvaW50ID0gXCJodHRwczovL3d3dy5lYmkuYWMudWsvbWV0YWdlbm9taWNzL3Byb3RlaW5zL2FwaS92MS9wcm90ZWluL3NlYXJjaFwiXG5cbmJpb21lX3N0cmluZyA9IFwicm9vdDpFbmdpbmVlcmVkOldhc3Rld2F0ZXJcIlxubWd5cF9jb3VudCA9IDVcblxucmVzID0gcmVxdWVzdHMuZ2V0KFxuICBmXCJ7cHJvdGVpbl9zZWFyY2hfZW5kcG9pbnR9P2xpbWl0PXttZ3lwX2NvdW50fSZiaW9tZV9saW5lYWdlPXtiaW9tZV9zdHJpbmd9XCJcbikuanNvbigpXG5cbnByaW50KHJlcykifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHJlcXVlc3RzXG5cbiMgVE9ETzogY2hhbmdlIHRoaXMgdG8gdGhlIHByb2QgVVJMIG9uY2UgY2hhbmdlcyBhcmUgZGVwbG95ZWRcbnByb3RlaW5fc2VhcmNoX2VuZHBvaW50ID0gXCJodHRwczovL3d3d2Rldi5lYmkuYWMudWsvbWV0YWdlbm9taWNzL3Byb3RlaW5zL2FwaS92MS9wcm90ZWluL3NlYXJjaFwiXG5cbmJpb21lX3N0cmluZyA9IFwicm9vdDpFbmdpbmVlcmVkOldhc3Rld2F0ZXJcIlxubWd5cF9jb3VudCA9IDVcblxucmVzID0gcmVxdWVzdHMuZ2V0KFxuICBmXCJ7cHJvdGVpbl9zZWFyY2hfZW5kcG9pbnR9P2xpbWl0PXttZ3lwX2NvdW50fSZiaW9tZV9saW5lYWdlPXtiaW9tZV9zdHJpbmd9XCJcbikuanNvbigpXG5cbnByaW50KHJlcykifQ==
 </script>
 </div>
 <p>These MGYPs could then be searched programmatically with the detail endpoint we went through earlier!</p>
-<p>Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession <strong>PF01596</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession <code>PF01596</code>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="accessing-all-of-mgnify-proteins-with-the-release-parquet-files" class="level3">
 <h3 class="anchored" data-anchor-id="accessing-all-of-mgnify-proteins-with-the-release-parquet-files">Accessing all of MGnify Proteins with the release Parquet files</h3>
-<p>So far we’ve looked at how we can access MGnify90 data. However, MGnify90 contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.</p>
+<p>So far we’ve looked at how we can access MGnify90 data. However, MGnify90 only contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.</p>
 <p>There are programmatic ways of accessing this data, by downloading the latest release files. You can see the full release on our <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/">FTP</a>. The <code>README.md</code> <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">file</a> in the FTP gives an in-depth description of the release files. As you can see, the release is mostly made up of flat files like .tsv and .fasta files. You can download and parse these, however <strong>we highly recommend you instead use the equivalent .parquet files</strong>. As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of the full MGnify Proteins release files due to numerous advantages:</p>
 <ul>
 <li>Columnar data access: As Parquet is a columnar data format, certain query structures that are commonly used to search MGnify Proteins metadata become significantly faster, as only columns of interest need to be searched. Columnar data similarly allows for partial reading of remote files.</li>
@@ -501,16 +584,16 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHJlcXVlc3RzXG5c
 <li><a href="https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet">mgy_proteins_metadata.parquet</a></li>
 <li><a href="https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_pfam.parquet">mgy_proteins_pfam.parquet</a></li>
 </ul>
-<p>For example, to query the <code>mgy_protein_sequences.parquet</code> file for <strong>MGYP009395360842</strong>:</p>
+<p>For example, to query the <code>mgy_protein_sequences.parquet</code> file for <code>MGYP009395360842</code>:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Example query</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Query result</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Example query</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Query result</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> protein_id<span class="op">=</span><span class="dv">9395360842</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div style="overflow-x: auto;">
 <table class="caption-top table">
 <colgroup>
@@ -548,7 +631,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will have gotten used to each MGYP being referred to with the MGYP prefix. Within the parquet files, these <strong>prefixes are removed</strong>, so that the data type can be an integer (which has advantages for performance). If you have an MGYP of interest and want to query it in the parquet files, strip the MGYP prefix and any leading zeroes. For example, for the protein sequence <strong>MGYP007613976461</strong>, its equivalent <code>protein_id</code> value would be <strong>7613976461</strong>. The same thing is true for Pfam accessions, e.g.&nbsp;<strong>PF01596</strong> would have the <code>pfam_accession</code> value <strong>1596</strong>.</p>
+<p>You will have gotten used to each MGYP being referred to with the MGYP prefix. Within the parquet files, these <strong>prefixes are removed</strong>, so that the data type can be an integer (which has advantages for performance). If you have an MGYP of interest and want to query it in the parquet files, strip the MGYP prefix and any leading zeroes. For example, for the protein sequence <code>MGYP007613976461</code>, its equivalent <code>protein_id</code> value would be <code>7613976461</code>. The same thing is true for Pfam accessions, e.g.&nbsp;<code>PF01596</code> would have the <code>pfam_accession</code> value <code>1596</code>.</p>
 </div>
 </div>
 </section>
@@ -556,52 +639,10 @@ Important
 <h4 class="anchored" data-anchor-id="try-out-these-four-example-queries">Try out these four example queries</h4>
 <p>Below, you will find an editable console you can use to write and run DuckDB queries. We’ve prepared four tasks that you need to write queries for - have a go at them, and then compare them to the pre-written solutions!</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Querying metadata by assembly</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Querying metadata by study</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Querying sequences by full_length status and sequence length</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false" href="">Querying Pfam by Pfam accession</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Querying metadata by assembly</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Querying metadata by study</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false" href="">Querying sequences by full_length status and sequence length</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-4" role="tab" aria-controls="tabset-7-4" aria-selected="false" href="">Querying Pfam by Pfam accession</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all proteins from the assembly <strong>ERZ24519387</strong>.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show me the solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet'</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> assembly_accession <span class="op">=</span> <span class="st">'ERZ24519387'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all proteins from the study <strong>ERP104209</strong>.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show me the solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet'</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> study_accession <span class="op">=</span> <span class="st">'ERP104209'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
-<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all protein sequences that are <strong>full_length</strong> and have a <strong>minimum sequence length of 200</strong>.</p>
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all proteins from the assembly <code>ERZ24519387</code>.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -614,15 +655,15 @@ Important
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> full_length <span class="kw">AND</span> <span class="fu">length</span>(<span class="kw">sequence</span>) <span class="op">&gt;=</span> <span class="dv">200</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet'</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> assembly_accession <span class="op">=</span> <span class="st">'ERZ24519387'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-3-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-4-tab">
-<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all protein sequences that have the Pfam accession <strong>PF13509</strong></p>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all proteins from the study <code>ERP104209</code>.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -635,6 +676,48 @@ Important
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet'</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> study_accession <span class="op">=</span> <span class="st">'ERP104209'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-3-tab">
+<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all protein sequences that are <strong>full_length</strong> and have a <strong>minimum sequence length of 200</strong>.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> full_length <span class="kw">AND</span> <span class="fu">length</span>(<span class="kw">sequence</span>) <span class="op">&gt;=</span> <span class="dv">200</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-7-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-4-tab">
+<p>Use the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md">README.md</a> and this <a href="https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins">documentation</a> to write a query for retrieving all protein sequences that have the Pfam accession <code>PF13509</code></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_pfam.parquet'</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> pfam_accession <span class="op">=</span> <span class="dv">13509</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -645,7 +728,7 @@ Important
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="355" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 354;"><span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="436" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 435;"><span id="cb8-436"><a href="#cb8-436" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> DuckDBClient<span class="op">.</span><span class="fu">of</span>({})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -653,44 +736,44 @@ Important
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="361" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 360;"><span id="cb9-361"><a href="#cb9-361" aria-hidden="true" tabindex="-1"></a>mutable console1_sql <span class="op">=</span> <span class="kw">null</span></span>
-<span id="cb9-362"><a href="#cb9-362" aria-hidden="true" tabindex="-1"></a>mutable console1_clicks <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-363"><a href="#cb9-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-364"><a href="#cb9-364" aria-hidden="true" tabindex="-1"></a>console1_ui <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="query-container"&gt;</span></span>
-<span id="cb9-365"><a href="#cb9-365" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;label style="display: flex; justify-content: space-between; align-items: center;"&gt;</span></span>
-<span id="cb9-366"><a href="#cb9-366" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;DuckDB Query&lt;/span&gt;</span></span>
-<span id="cb9-367"><a href="#cb9-367" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class="run-query-btn" id="runBtn_console1"&gt;Run Query&lt;/button&gt;</span></span>
-<span id="cb9-368"><a href="#cb9-368" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/label&gt;</span></span>
-<span id="cb9-369"><a href="#cb9-369" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;textarea</span></span>
-<span id="cb9-370"><a href="#cb9-370" aria-hidden="true" tabindex="-1"></a><span class="vs">    id="sqlTextarea_console1"</span></span>
-<span id="cb9-371"><a href="#cb9-371" aria-hidden="true" tabindex="-1"></a><span class="vs">    rows="6"</span></span>
-<span id="cb9-372"><a href="#cb9-372" aria-hidden="true" tabindex="-1"></a><span class="vs">    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"</span></span>
-<span id="cb9-373"><a href="#cb9-373" aria-hidden="true" tabindex="-1"></a><span class="vs">  &gt;SELECT *</span></span>
-<span id="cb9-374"><a href="#cb9-374" aria-hidden="true" tabindex="-1"></a><span class="vs">FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span></span>
-<span id="cb9-375"><a href="#cb9-375" aria-hidden="true" tabindex="-1"></a><span class="vs">WHERE protein_id=9395360842;&lt;/textarea&gt;</span></span>
-<span id="cb9-376"><a href="#cb9-376" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span></span>
-<span id="cb9-377"><a href="#cb9-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-378"><a href="#cb9-378" aria-hidden="true" tabindex="-1"></a>console1_setup <span class="op">=</span> {</span>
-<span id="cb9-379"><a href="#cb9-379" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> btn <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"runBtn_console1"</span>)<span class="op">;</span></span>
-<span id="cb9-380"><a href="#cb9-380" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> textarea <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"sqlTextarea_console1"</span>)<span class="op">;</span></span>
-<span id="cb9-381"><a href="#cb9-381" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (btn <span class="op">&amp;&amp;</span> textarea) {</span>
-<span id="cb9-382"><a href="#cb9-382" aria-hidden="true" tabindex="-1"></a>    btn<span class="op">.</span><span class="at">onclick</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb9-383"><a href="#cb9-383" aria-hidden="true" tabindex="-1"></a>      mutable console1_sql <span class="op">=</span> textarea<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
-<span id="cb9-384"><a href="#cb9-384" aria-hidden="true" tabindex="-1"></a>      mutable console1_clicks <span class="op">=</span> console1_clicks <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-385"><a href="#cb9-385" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
-<span id="cb9-386"><a href="#cb9-386" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-387"><a href="#cb9-387" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb9-388"><a href="#cb9-388" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-389"><a href="#cb9-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-390"><a href="#cb9-390" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">=</span> {</span>
-<span id="cb9-391"><a href="#cb9-391" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (console1_sql <span class="op">===</span> <span class="kw">null</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb9-392"><a href="#cb9-392" aria-hidden="true" tabindex="-1"></a>  console1_clicks<span class="op">;</span></span>
-<span id="cb9-393"><a href="#cb9-393" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> db<span class="op">.</span><span class="fu">query</span>(console1_sql)<span class="op">;</span></span>
-<span id="cb9-394"><a href="#cb9-394" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-395"><a href="#cb9-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-396"><a href="#cb9-396" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">===</span> <span class="kw">null</span></span>
-<span id="cb9-397"><a href="#cb9-397" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;p style="color: #6c757d; font-style: italic;"&gt;Click "Run Query" to execute the DuckDB query above.&lt;/p&gt;`</span></span>
-<span id="cb9-398"><a href="#cb9-398" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> Inputs<span class="op">.</span><span class="fu">table</span>(console1_result<span class="op">,</span> { <span class="dt">format</span><span class="op">:</span> { <span class="dt">protein_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">occurrence_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">study_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">assembly_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">contig_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">cluster_rep</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">pfam_accession</span><span class="op">:</span> x <span class="kw">=&gt;</span> x } })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="442" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 441;"><span id="cb9-442"><a href="#cb9-442" aria-hidden="true" tabindex="-1"></a>mutable console1_sql <span class="op">=</span> <span class="kw">null</span></span>
+<span id="cb9-443"><a href="#cb9-443" aria-hidden="true" tabindex="-1"></a>mutable console1_clicks <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-444"><a href="#cb9-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-445"><a href="#cb9-445" aria-hidden="true" tabindex="-1"></a>console1_ui <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="query-container"&gt;</span></span>
+<span id="cb9-446"><a href="#cb9-446" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;label style="display: flex; justify-content: space-between; align-items: center;"&gt;</span></span>
+<span id="cb9-447"><a href="#cb9-447" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;DuckDB Query&lt;/span&gt;</span></span>
+<span id="cb9-448"><a href="#cb9-448" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;button class="run-query-btn" id="runBtn_console1"&gt;Run Query&lt;/button&gt;</span></span>
+<span id="cb9-449"><a href="#cb9-449" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/label&gt;</span></span>
+<span id="cb9-450"><a href="#cb9-450" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;textarea</span></span>
+<span id="cb9-451"><a href="#cb9-451" aria-hidden="true" tabindex="-1"></a><span class="vs">    id="sqlTextarea_console1"</span></span>
+<span id="cb9-452"><a href="#cb9-452" aria-hidden="true" tabindex="-1"></a><span class="vs">    rows="6"</span></span>
+<span id="cb9-453"><a href="#cb9-453" aria-hidden="true" tabindex="-1"></a><span class="vs">    style="width: 100%; font-family: monospace; padding: 12px 16px; border: none;"</span></span>
+<span id="cb9-454"><a href="#cb9-454" aria-hidden="true" tabindex="-1"></a><span class="vs">  &gt;SELECT *</span></span>
+<span id="cb9-455"><a href="#cb9-455" aria-hidden="true" tabindex="-1"></a><span class="vs">FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/fa10aa18f78bee48fe0e5163c8e4ca417051b7f0/data/mgy_protein_sequences.parquet'</span></span>
+<span id="cb9-456"><a href="#cb9-456" aria-hidden="true" tabindex="-1"></a><span class="vs">WHERE protein_id=9395360842;&lt;/textarea&gt;</span></span>
+<span id="cb9-457"><a href="#cb9-457" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span></span>
+<span id="cb9-458"><a href="#cb9-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-459"><a href="#cb9-459" aria-hidden="true" tabindex="-1"></a>console1_setup <span class="op">=</span> {</span>
+<span id="cb9-460"><a href="#cb9-460" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> btn <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"runBtn_console1"</span>)<span class="op">;</span></span>
+<span id="cb9-461"><a href="#cb9-461" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> textarea <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"sqlTextarea_console1"</span>)<span class="op">;</span></span>
+<span id="cb9-462"><a href="#cb9-462" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (btn <span class="op">&amp;&amp;</span> textarea) {</span>
+<span id="cb9-463"><a href="#cb9-463" aria-hidden="true" tabindex="-1"></a>    btn<span class="op">.</span><span class="at">onclick</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-464"><a href="#cb9-464" aria-hidden="true" tabindex="-1"></a>      mutable console1_sql <span class="op">=</span> textarea<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
+<span id="cb9-465"><a href="#cb9-465" aria-hidden="true" tabindex="-1"></a>      mutable console1_clicks <span class="op">=</span> console1_clicks <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-466"><a href="#cb9-466" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb9-467"><a href="#cb9-467" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-468"><a href="#cb9-468" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb9-469"><a href="#cb9-469" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-470"><a href="#cb9-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-471"><a href="#cb9-471" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">=</span> {</span>
+<span id="cb9-472"><a href="#cb9-472" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (console1_sql <span class="op">===</span> <span class="kw">null</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb9-473"><a href="#cb9-473" aria-hidden="true" tabindex="-1"></a>  console1_clicks<span class="op">;</span></span>
+<span id="cb9-474"><a href="#cb9-474" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> db<span class="op">.</span><span class="fu">query</span>(console1_sql)<span class="op">;</span></span>
+<span id="cb9-475"><a href="#cb9-475" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-476"><a href="#cb9-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-477"><a href="#cb9-477" aria-hidden="true" tabindex="-1"></a>console1_result <span class="op">===</span> <span class="kw">null</span></span>
+<span id="cb9-478"><a href="#cb9-478" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;p style="color: #6c757d; font-style: italic;"&gt;Click "Run Query" to execute the DuckDB query above.&lt;/p&gt;`</span></span>
+<span id="cb9-479"><a href="#cb9-479" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> Inputs<span class="op">.</span><span class="fu">table</span>(console1_result<span class="op">,</span> { <span class="dt">format</span><span class="op">:</span> { <span class="dt">protein_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">occurrence_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">study_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">assembly_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">contig_id</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">cluster_rep</span><span class="op">:</span> x <span class="kw">=&gt;</span> x<span class="op">,</span> <span class="dt">pfam_accession</span><span class="op">:</span> x <span class="kw">=&gt;</span> x } })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
