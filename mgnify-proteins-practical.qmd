@@ -136,7 +136,7 @@ After waiting about a minute, you will be redirected to a webpage containing the
 
 ![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More detail about a match can be found by clicking on the arrow here, including the full alignment.](images/mgnify_proteins_hmmer_results.png){width=100%}
 
-The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [PF01596](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for `O-methyltransferase`. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!
+The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [`PF01596`](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for `O-methyltransferase`. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!
 
 Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.
 
@@ -200,7 +200,7 @@ The answers are:
 - Just one - itself. This cluster is therefore what we call a "singleton"
 - It isn't a full-length sequence, as can be seen from the **X**
 - It's also found in just one biome: Plants
-- The MGYP has two Pfam accessions (PF01596 and PF13578), and both also exist in the best hit
+- The MGYP has two Pfam accessions (`PF01596` and `PF13578`), which both also exist in the best hit
 
 ::::
 
@@ -252,7 +252,7 @@ The same data that powers the protein detail pages on your browser is accessible
 
 #### Protein detail endpoint
 
-Have a look at this Python example of how you can query the API's protein detail endpoint to retrieve the same data we were looking at earlier for **MGYP002778845309**: 
+Have a look at this Python example of how you can query the API's protein detail endpoint to retrieve the same data we were looking at earlier for `MGYP002778845309`: 
 
 ```{pyodide}
 #| edit: true
@@ -293,8 +293,6 @@ Have a go at querying a different MGYP from the HMMER search results we generate
 
 :::
 
-
-
 #### Protein search endpoint
 
 If you want to search for an attribute of a protein rather than finding a specific MGYP e.g. a specific biome or Pfam accession, you can use the protein search endpoint. For example, to grab five MGYPs with the Wastewater biome:
@@ -321,7 +319,7 @@ These MGYPs could then be searched programmatically with the detail endpoint we 
 
 ## Task
 
-Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession **PF01596**.
+Have a read of the documentation and see how you could search for MGYPs that have the Pfam accession `PF01596`.
 
 :::
 
@@ -350,7 +348,7 @@ To point to the correct file in your query, right-click on the file of interest 
 - [mgy_proteins_metadata.parquet](https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_metadata.parquet)
 - [mgy_proteins_pfam.parquet](https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practical/b459ef961db3f9780f81f81ce4d279bc06ad203e/data/mgy_proteins_pfam.parquet)
 
-For example, to query the `mgy_protein_sequences.parquet` file for **MGYP009395360842**:
+For example, to query the `mgy_protein_sequences.parquet` file for `MGYP009395360842`:
 
 :::: {.panel-tabset}
 
@@ -374,7 +372,7 @@ WHERE protein_id=9395360842
 To change parquet files, simply swap the string after the `FROM` statement with the new parquet file path.
 
 :::{.callout-important}
-You will have gotten used to each MGYP being referred to with the MGYP prefix. Within the parquet files, these **prefixes are removed**, so that the data type can be an integer (which has advantages for performance). If you have an MGYP of interest and want to query it in the parquet files, strip the MGYP prefix and any leading zeroes. For example, for the protein sequence **MGYP007613976461**, its equivalent `protein_id` value would be **7613976461**. The same thing is true for Pfam accessions, e.g. **PF01596** would have the `pfam_accession` value **1596**.
+You will have gotten used to each MGYP being referred to with the MGYP prefix. Within the parquet files, these **prefixes are removed**, so that the data type can be an integer (which has advantages for performance). If you have an MGYP of interest and want to query it in the parquet files, strip the MGYP prefix and any leading zeroes. For example, for the protein sequence `MGYP007613976461`, its equivalent `protein_id` value would be `7613976461`. The same thing is true for Pfam accessions, e.g. `PF01596` would have the `pfam_accession` value `1596`.
 :::
 
 #### Try out these four example queries
@@ -384,7 +382,7 @@ Below, you will find an editable console you can use to write and run DuckDB que
 :::: {.panel-tabset}
 
 ## Querying metadata by assembly
-Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the assembly **ERZ24519387**.
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the assembly `ERZ24519387`.
 
 ::: {.callout-note collapse="true" appearance="simple"}
 ## Show me the solution
@@ -396,7 +394,7 @@ WHERE assembly_accession = 'ERZ24519387';
 :::
 
 ## Querying metadata by study
-Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the study **ERP104209**.
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all proteins from the study `ERP104209`.
 
 ::: {.callout-note collapse="true" appearance="simple"}
 ## Show me the solution
@@ -420,7 +418,7 @@ WHERE full_length AND length(sequence) >= 200;
 :::
 
 ## Querying Pfam by Pfam accession
-Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all protein sequences that have the Pfam accession **PF13509**
+Use the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) and this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) to write a query for retrieving all protein sequences that have the Pfam accession `PF13509`
 
 ::: {.callout-note collapse="true" appearance="simple"}
 ## Show me the solution
@@ -430,7 +428,6 @@ FROM 'https://raw.githubusercontent.com/EBI-Metagenomics/mgnify-proteins-practic
 WHERE pfam_accession = 13509;
 ```
 :::
-
 
 ::::
 
