@@ -1,7 +1,8 @@
 project:
   title: "mgnify-proteins-practical"
   resources:
-    - "images/**"
+    - "images/mgnify_logo_vf2.svg"
+    - "images/embl_ebi_logo.svg"
 
 
 

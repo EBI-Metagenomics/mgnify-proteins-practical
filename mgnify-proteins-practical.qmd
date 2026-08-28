@@ -1,6 +1,6 @@
 ---
 title: "MGnify Proteins Practical"
-title-block-banner: images/embl_ebi_logo.svg
+title-block-banner: true
 format:
   live-html:
     toc: true
