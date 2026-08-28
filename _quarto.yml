@@ -1,5 +1,7 @@
 project:
   title: "mgnify-proteins-practical"
+  resources:
+    - "images/**"
 
 
 
