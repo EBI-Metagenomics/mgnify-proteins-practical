@@ -28,7 +28,7 @@ In this practical, you will learn how to access the data for the latest MGnify P
 
 ## MGnify Proteins website overview
 
-First, go to the [MGnify Proteins website](https://www.ebi.ac.uk/metagenomics/proteins/), and let's look at its main page together first.
+First, go to the [MGnify Proteins website](https://www.ebi.ac.uk/metagenomics/proteins/), and let's look at its main page.
 
 ![**Figure 1.** The top half of the MGnify Proteins website main page. **A)** MGnify Protein sequences bear `MGYP` accessions, and it's possible to search for MGYPs of interest here. **B)** Information about the latest release can be found here, including the number of cluster representatives.](images/mgnify_proteins_website_top.png){width=100%}
 
@@ -47,37 +47,49 @@ MEYKVLLTVFAAVFIAELGDKTQLATMLFAADKEVSKLTVFIGASFA
 LIAASGMGVLAGGFISQYMSERHLQLIAGIGFIAIGIWTLFKALTSG
 ```
 
-This non-redundant sequence can then potentially be found in more than one assembly. If so, both occurrences of that sequence would have the same MGYP accession.
+:::: {.panel-tabset}
+
+## Question
+Would the same protein sequence appearing in two different assemblies have different MGYPs?
+
+## Answer
+
+**No, they would have the same MGYP.** Since an MGYP corresponds to a unique protein sequence, if that exact sequence appears in two or more different assemblies, it would bear the same accession within the MGnify Proteins database. That allows us to aggregate metadata about sources like assemblies for a given MGYP, which you will see in a later section.
+
+::::
 
 :::{.callout-note}
 You can come back to **A\)** later on in the practical, once we have an MGYP of interest from running the HMMER sequence search.
 :::
 
-### MGnify Proteins releases
+### Clustering of MGnify Proteins 
 
-The latest release of MGnify Proteins is from July 2026, and so its release name is `2026_07`. The release consists of **5,739,566,171 MGYPs**, however the MGnify Proteins website only supports the **MGnify90** cluster representatives, which is a smaller, but still substantial, subset of **1,661,142,385 MGYPs**, which is what can be seen in **B\)**.
+The latest release of MGnify Proteins is from July 2026, and so its release name is `2026_07`, which  consists of **5,739,566,171 MGYPs**. However, due to how ever increasing size of this database being unwieldly for many applications, we cluster the sequences based on sequence identity and coverage to significantly reduce the number of sequences. For the latest release, we generate two clusterings: **MGnify90** and **MGnify30**
 
-There are ways of accessing the full dataset programmatically, which we will look at in a later section.
+#### MGnify90
+We've clustered the sequences at 90% sequence identity and coverage using DIAMOND/linclust [-@buchfink2026clustering], which we call **MGnify90**. The MGnify Proteins website only displays the **MGnify90** cluster representatives, which is a smaller, but still substantial, subset of **1,661,142,385 MGYPs**, which is what can be seen in **B\)**. This clustering removes a lot of the high levels of sequence redundancy within the database.
 
-## HMMER sequence search
+#### MGnify30
 
-HMMER is an algorithm for performing searches against a target sequence database. On the MGnify Proteins website, it's possible to input a query sequence into the HMMER Web Service [-@rajkovic2026hmmer] to search for similar sequences in the MGnify30 clustering of the database.
-
-### MGnify30
-More specifically, MGnify30 is split into three subsets:
+**MGnify30** is the result of clustering the MGnify90 cluster representatives at 30% sequence identity and 80% coverage. However, on its own, the subset size is still too large to power applications like the HMMER sequence search. To that end, we filter MGnify30 down to three different subsets.
 
 | MGnify30-C2 | MGnify30-C5-FL | MGnify30-C5-PPfam |
 |-------------|----------------|-------------------|
 | 128,674,267 | 20,911,652     | 18,155,509        |
 
-#### Non-singletons (MGnify30-C2)
+##### Non-singletons (MGnify30-C2)
 The non-singletons subset was created by extracting clusters that have **at least two members**, thereby excluding a majority of the representatives. This subset contains **128,674,267 cluster representatives**.
 
-#### Larger non-singletons (MGnify30-C5-FL)
+##### Larger non-singletons (MGnify30-C5-FL)
 The larger non-singletons subset was created by extracting clusters that have **at least five members, including at least one member that is predicted to be a full-length sequence**. This subset therefore reduces the space even further, and guarantees at least one full-length sequence for increased confidence. This subset contains **20,911,652 cluster representatives**.
 
-#### Pfam-poor non-singletons (MGnify30-C5-PPfam)
+##### Pfam-poor non-singletons (MGnify30-C5-PPfam)
 The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset similarly reduces the space significantly, and contains clusters for which function is relatively unknown. This subset contains **18,155,509 cluster representatives**.
+
+## HMMER sequence search
+
+HMMER is an algorithm for performing searches against a target sequence database. On the MGnify Proteins website, it's possible to input a query sequence into the HMMER Web Service [-@rajkovic2026hmmer] to search for similar sequences in the MGnify30 clustering of the database.
+
 
 ### Running HMMER sequence search on MGnify30
 
