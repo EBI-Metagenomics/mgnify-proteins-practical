@@ -69,7 +69,7 @@ We will come back to **A\)** later on in the practical.
 
 ### Clustering of MGnify Proteins 
 
-The latest release of MGnify Proteins is from July 2026, and so its release name is `2026_07`, which  consists of **5,739,566,171 MGYPs**. However, due to how ever increasing size of this database being unwieldly for many applications, we cluster the sequences based on sequence identity and coverage to significantly reduce the number of sequences. For the latest release, we generate two clusterings: **MGnify90** and **MGnify30**
+The latest release of MGnify Proteins was published in July 2026 and is therefore named `2026_07`. It consists of **5,739,566,171 MGYPs**. However, as the database continues to grow, its increasing size can become unwieldy for many applications. Therefore, we offer two clustered databases based on sequence identity and coverage to significantly reduce the number of sequences. For the latest release, we generate two clusterings: **MGnify90** and **MGnify30**.
 
 #### MGnify90
 We've clustered the sequences at 90% sequence identity and coverage using DIAMOND/linclust [-@buchfink2026clustering], which we call **MGnify90**. The MGnify Proteins website only displays the **MGnify90** cluster representatives, which is a smaller, but still substantial, subset of **1,661,142,385 MGYPs**, which is what can be seen in **B\)**. This clustering removes a lot of the high levels of sequence redundancy within the database.
@@ -82,6 +82,7 @@ We've clustered the sequences at 90% sequence identity and coverage using DIAMON
 |-------------|----------------|-------------------|
 | 128,674,267 | 20,911,652     | 18,155,509        |
 
+
 ##### Non-singletons (MGnify30-C2)
 The non-singletons subset was created by extracting clusters that have **at least two members**, thereby excluding a majority of the representatives. This subset contains **128,674,267 cluster representatives**.
 
@@ -89,7 +90,7 @@ The non-singletons subset was created by extracting clusters that have **at leas
 The larger non-singletons subset was created by extracting clusters that have **at least five members, including at least one member that is predicted to be a full-length sequence**. This subset therefore reduces the space even further, and guarantees at least one full-length sequence for increased confidence. This subset contains **20,911,652 cluster representatives**.
 
 ##### Pfam-poor non-singletons (MGnify30-C5-PPfam)
-The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset similarly reduces the space significantly, and contains clusters for which function is relatively unknown. This subset contains **18,155,509 cluster representatives**.
+The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset contains clusters for which function is relatively unknown. This subset contains **18,155,509 cluster representatives**.
 
 ## HMMER sequence search
 
@@ -139,11 +140,11 @@ We pasted the sequence in FASTA format, but you can also just paste the sequence
 
 After waiting about a minute, you will be redirected to a webpage containing the results of your search:
 
-![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More detail about a match can be found by clicking on the arrow here, including the full alignment.](images/mgnify_proteins_hmmer_results.png){width=100%}
+![**Figure 3.** The HMMER results page. **A)** This diagram displays the different Pfam matches found on the query sequence - in this case there is one with the name "Methyltransf_3". **B)** At the bottom of the results page, a table with all the matches can be found. For each matching MGYP, their source studies and assemblies, matched Pfam accessions, and the E-value of the match, can be found. **C)** More details about a match can be found by clicking on the arrow here, including the full alignment against the chosen protein record.](images/mgnify_proteins_hmmer_results.png){width=100%}
 
-The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accession are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [`PF01596`](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for `O-methyltransferase`. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!
+The result page is organised into two major sections, with the first (**A**) containing a schematic describing which, if any, Pfam accessions were found on the query sequence. The schematic does not just visualise which Pfam accessions are predicted on the sequence, but also the overall architecture in which those accessions are laid out i.e. the order and location of Pfams within the sequence. In this example, there is only one known Pfam accession: [`PF01596`](https://www.ebi.ac.uk/interpro/entry/pfam/PF01596/), which stands for `O-methyltransferase`. That Pfam matches what we know about our query sequence from its Uniprot entry, which makes sense!
 
-Below the schematic, there is a paginated table containing all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions each target sequence has, and finally the E-value of the match.
+Under the schematic, a paginated table contains all of the MGnify30 matches to the query sequence (**B**). For each matching MGYP i.e. the target sequence, we get their MGYP accessions, and metadata about the studies and assemblies those target MGYPs come from. We also get a list of Pfam accessions associated with each target sequence, and finally the E-value of the match.
 
 :::: {.panel-tabset}
 
@@ -167,7 +168,7 @@ Documentation about this expanded view can be found [here](https://hmmer-web-doc
 
 ## Protein detail pages
 
-On the MGnify Proteins website, every cluster representative has a protein detail page, which contains information about that particular MGYP. It's possible to go straight to an MGYP's landing page from the HMMER result by clicking on the target MGYP, but it's also possible to write the MGYP accession into the text box at the top of the MGnify Proteins' main page, as mentioned [previously](#sec-mgyp-accessions).
+On the MGnify Proteins website, every cluster representative has a protein detail page, which contains information about that particular MGYP. It's possible to go straight to an MGYP's landing page from the HMMER result by clicking on the target MGYP, but it's also possible to write the MGYP accession into the text box at the top of the MGnify Proteins main page, as mentioned [previously](#sec-mgyp-accessions).
 
 As we have a results page open, let's click on the best hit (`MGYP002778845309`) to open its [detail page](https://www.ebi.ac.uk/metagenomics/proteins/MGYP002778845309/). The detail page has multiple sections with useful information that we will go through, starting with its top half.
 
@@ -334,7 +335,7 @@ Have a read of the documentation and see how you could search for MGYPs that hav
 
 So far we've looked at how we can access MGnify90 data. However, MGnify90 only contains about 29% of the 5.7 billion non-redundant sequences of the entire database. While MGnify90 does remove a lot of the sequence redundancy through its 90% sequence identity clustering, some applications might want to take advantage of the full MGnify Proteins database.
 
-There are programmatic ways of accessing this data, by downloading the latest release files. You can see the full release on our [FTP](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/). The `README.md` [file](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) in the FTP gives an in-depth description of the release files. As you can see, the release is mostly made up of flat files like .tsv and .fasta files. You can download and parse these, however **we highly recommend you instead use the equivalent .parquet files**. As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of the full MGnify Proteins release files due to numerous advantages:
+You can access the latest release files programmatically by downloading the latest release files. You can see the full release on our [FTP](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/). The `README.md` [file](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) in the FTP gives an in-depth description of the release files. As you can see, the release is mostly made up of flat files like .tsv and .fasta files. You can download and parse these, however **we highly recommend you instead use the equivalent .parquet files**. As of the 2026_07 release, we have started shifting towards the use of files in the Apache Parquet format for the distribution of the full MGnify Proteins release files due to numerous advantages:
 
 - Columnar data access: As Parquet is a columnar data format, certain query structures that are commonly used to search MGnify Proteins metadata become significantly faster, as only columns of interest need to be searched. Columnar data similarly allows for partial reading of remote files.
 - Native schemas: Parquet stores metadata about each column within a file - including data types - much like a relational database. These schemas allows for a more explicit data structure, more robust data validation, and more efficient queries e.g. querying based on integer identifiers in a Parquet file vs flat-files without a schema like .tsv, the possibility of applying Bloom filters, etc.
@@ -345,7 +346,7 @@ In this section, we will see how we can query the parquet files using [DuckDB](h
 
 #### A simple example DuckDB query
 
-Most of the parquet files are too lage to download for this practical, and remotely querying them can be slow. For the purpose of this practical, we therefore made very small versions of the key files to test here. They are structurally identical to the release files, and so the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) can be read to gain an overview of the contents of the files, while this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) can be used to find some example queries.
+Most of the parquet files are too large to download for this practical, and remotely querying them can be slow. For the purpose of this practical, we therefore made very small versions of the key files to test here. They are structurally identical to the release files, and so the [README.md](https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/README.md) can be read to gain an overview of the contents of the files, while this [documentation](https://docs.mgnify.org/src/docs/mgnify-proteins-parquet-queries.html#get-an-assemblys-proteins) can be used to find some example queries.
 
 To point to the correct file in your query, right-click on the file of interest and **copy the link**. You **do not need to download the files** for this practical (although you are welcome to if you want to use them on your own machine). The test files are:
 
