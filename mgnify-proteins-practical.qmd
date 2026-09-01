@@ -76,7 +76,7 @@ We've clustered the sequences at 90% sequence identity and coverage using DIAMON
 
 #### MGnify30
 
-**MGnify30** is the result of clustering the MGnify90 cluster representatives at 30% sequence identity and 80% coverage. However, on its own, the subset size is still too large to power applications like the HMMER sequence search. To that end, we filter MGnify30 down to three different subsets.
+**MGnify30** is the result of clustering the MGnify90 cluster representatives at 30% sequence identity and 80% coverage. However, on its own, the subset size is still too large to be handled by applications like the HMMER sequence search. To that end, we filter MGnify30 down to three different subsets.
 
 | MGnify30-C2 | MGnify30-C5-FL | MGnify30-C5-PPfam |
 |-------------|----------------|-------------------|
@@ -111,7 +111,7 @@ The default HMMER search settings are good enough to get high homology hits, and
 
 ## Hint
 
-If you have not worked with this kind of sequence tool before, the HMMER Web documentation for its thresholds can be found [here](https://hmmer-web-docs.readthedocs.io/en/latest/searches.html#thresholds).
+If you have not worked with this kind of sequence tool before, [the thresholds descriptions in the HMMER Web documentation]https://hmmer-web-docs.readthedocs.io/en/latest/searches.html#thresholds) can help.
 
 ## Answer
 
@@ -163,7 +163,7 @@ The first MGYP in the table - `MGYP002778845309` - can be considered the best ma
 We can see some more details about this match by clicking on the arrow on the leftmost side of the row (**C**). This expands the row, reveals the sequence alignment between the query and the target, and shows a new table with further information about this alignment.
 
 :::{.callout-note}
-Documentation about this expanded view can be found [here](https://hmmer-web-docs.readthedocs.io/en/latest/result.html#alignments).
+The [HMMER Web documentation](https://hmmer-web-docs.readthedocs.io/en/latest/result.html#alignments) describes this expanded view.
 :::
 
 ## Protein detail pages
@@ -225,7 +225,7 @@ In 2023, Meta generated tertiary structures using their tool ESMFold for all of 
 
 
 :::{.callout-warning}
-With the latest release (`2027_07`) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for the cluster representatives of the older `2024_04` release, which is almost half of them. There will therefore be cases where an MGYP's detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.
+With the latest release (`2026_07`) and the continued growth of MGnify Proteins, we can currently only provide tertiary structure predictions for the cluster representatives of the older `2024_04` release, which is almost half of them. There will therefore be cases where an MGYP's detail page will not have a tertiary structure. We are currently exploring how we could provide tertiary structures for all of our cluster representatives again, and will update this practical once we have news on this.
 :::
 
 The page also contains a table containing further metadata about the MGYP (**B**). This includes information about which studies and assemblies an MGYP was found in. Also included in this table is information about which exact contig a protein was found in from an assembly, and where on that contig it lies (start and end positions, and strand). If you're interested in the gene neighbourhood of a particular protein, this information makes it possible to look for closely occurring proteins with some programmatic querying of the MGnify Proteins release files.
