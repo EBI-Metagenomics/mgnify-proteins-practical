@@ -35,7 +35,7 @@ In this practical, you will learn how to access the data for the latest MGnify P
 
 First, go to the [MGnify Proteins website](https://www.ebi.ac.uk/metagenomics/proteins/), and let's look at its main page.
 
-![**Figure 1.** The top half of the MGnify Proteins website main page. **A)** MGnify Protein sequences bear `MGYP` accessions, and it's possible to search for MGYPs of interest here. **B)** Information about the latest release can be found here, including the number of cluster representatives.](images/mgnify_proteins_website_top.png){width=100%}
+![**Figure 1.** The top half of the MGnify Proteins website main page. **A)** MGnify Protein sequences bear `MGYP` accessions, and it's possible to search for MGYPs of interest here. **B)** Information about the latest release can be found here, including the number of MGnify90 cluster representatives.](images/mgnify_proteins_website_top.png){width=100%}
 
 Figure 1 shows the top part of the main page. There are two points of interest here:
 
@@ -101,7 +101,7 @@ HMMER is an algorithm for performing searches against a target sequence database
 
 ![**Figure 2.** The bottom half of the MGnify Proteins website main page, with an input form for running HMMER sequence search on MGnify Proteins data. **A)** To run HMMER, input a query sequence for which you want to find similar hits within MGnify Proteins in this text box. An example input can be displayed by clicking on `example` above the text box. **B)** You can choose between three subsets of the MGnify30 clustering of the database here. **C)** You can modify some of the basic search parameters for HMMER here if necessary for your use case e.g. more strict searching criteria, although for most cases the default values should be fine.](images/mgnify_proteins_website_bottom.png){width=100%}
 
-Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job. The first part of the form - **A)** - is a textbox you can use you submit your query sequence. This input sequence will then be searched for in the chosen MGnify30 subset. The second part of the form - **B)** - is a dropdown menu you can use to select one of the three MGnify30 subsets described earlier in this practical. Finally, in the final part of the form - **C)** - some of the adjustable HMMER search parameters are displayed, and can be modified.
+Figure 2 shows the bottom part of main page, and contains the form you can use to submit a HMMER sequence search job.
 
 :::: {.panel-tabset}
 
@@ -217,7 +217,7 @@ You can interact with the sequence viewer by zooming in, zooming out, and draggi
 
 ### Tertiary structure, cross-references, & primary sequence information
 
-As you scroll down from here, we have three more sections of interest in the bottom half of the protein detail page:
+As you scroll down from here, we have three more sections of interest in the bottom half of `MGYP002778845309`'s detail page:
 
 ![**Figure 5.** The bottom half of a MGnify90 detail page. **A)** Almost half of the cluster representatives (772 million) have a tertiary structure, which were predicted by ESMFold in 2023 for the ESM Metagenomic Atlas. If an MGYP has a structure, it will can be viewed and interacted with here. **B)** You can find metadata about an MGYP's source here, including all studies, asssemblies, and contigs it was found in. **C)** The sequence of the MGYP can be viewed and copied here.](images/mgnify_proteins_protein_detail_bottom.png){width=80%}
 
