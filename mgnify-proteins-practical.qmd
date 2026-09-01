@@ -64,7 +64,7 @@ Would the same protein sequence appearing in two different assemblies have diffe
 ::::
 
 :::{.callout-note}
-You can come back to **A\)** later on in the practical, once we have an MGYP of interest from running the HMMER sequence search.
+We will come back to **A\)** later on in the practical.
 :::
 
 ### Clustering of MGnify Proteins 
