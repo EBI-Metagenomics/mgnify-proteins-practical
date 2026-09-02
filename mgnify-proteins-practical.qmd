@@ -265,8 +265,7 @@ Have a look at this Python example of how you can query the API's protein detail
 #| autorun: false
 import requests
 
-# TODO: change this to the prod URL once changes are deployed
-protein_endpoint = "https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein"
+protein_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein"
 
 mgyp = "MGYP002778845309"
 res = requests.get(
@@ -306,8 +305,7 @@ If you want to search for an attribute of a protein rather than finding a specif
 ```{pyodide}
 import requests
 
-# TODO: change this to the prod URL once changes are deployed
-protein_search_endpoint = "https://wwwdev.ebi.ac.uk/metagenomics/proteins/api/v1/protein/search"
+protein_search_endpoint = "https://www.ebi.ac.uk/metagenomics/proteins/api/v1/protein/search"
 
 biome_string = "root:Engineered:Wastewater"
 mgyp_count = 5
