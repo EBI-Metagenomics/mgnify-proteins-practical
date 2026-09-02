@@ -59,7 +59,7 @@ Would the same protein sequence appearing in two different assemblies have diffe
 
 ## Answer
 
-**No, they would have the same MGYP.** Since an MGYP corresponds to a unique protein sequence, if that exact sequence appears in two or more different assemblies, it would bear the same accession within the MGnify Proteins database. That allows us to aggregate metadata about sources like assemblies for a given MGYP, which you will see in a later section.
+**No, they would have the same MGYP.** Since an MGYP corresponds to a unique protein sequence, if that exact sequence appears in two or more different assemblies, it would bear the same accession within the MGnify Proteins database. That allows us to aggregate metadata about sources, like samples an assembly derives from for a given MGYP, which you will see in a later section.
 
 ::::
 
