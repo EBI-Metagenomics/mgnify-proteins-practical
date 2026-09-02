@@ -84,13 +84,13 @@ We've clustered the sequences at 90% sequence identity and coverage using DIAMON
 
 
 ##### Non-singletons (MGnify30-C2)
-The non-singletons subset was created by extracting clusters that have **at least two members**, thereby excluding a majority of the representatives. This subset contains **128,674,267 cluster representatives**.
+The non-singletons subset was created by extracting clusters that have **at least two members**, thereby excluding a majority of the representatives. This subset contains **128,674,267 cluster representatives**. By removing all singletons, but still including clusters containing as little as two members, this subset gives every cluster representative at least one more member sequence that can be used in analysis.
 
 ##### Larger non-singletons (MGnify30-C5-FL)
-The larger non-singletons subset was created by extracting clusters that have **at least five members, including at least one member that is predicted to be a full-length sequence**. This subset therefore reduces the space even further, and guarantees at least one full-length sequence for increased confidence. This subset contains **20,911,652 cluster representatives**.
+The larger non-singletons subset was created by extracting clusters that have **at least five members, including at least one member that is predicted to be a full-length sequence**. This subset therefore reduces the space even further, and guarantees at least one full-length sequence for increased confidence. This subset contains **20,911,652 cluster representatives**. While this subset is smaller, with the clusters having at least five members and containing at least one full-length sequence, assertions about function or structure can be more confident.
 
 ##### Pfam-poor non-singletons (MGnify30-C5-PPfam)
-The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset contains clusters for which function is relatively unknown. This subset contains **18,155,509 cluster representatives**.
+The Pfam-poor non-singletons subset was created by extracting clusters that have **at least five members, and where at least 90% of the cluster members do not have a Pfam accession**. This subset contains **18,155,509 cluster representatives**. The use of this subset allows for analysis to focus on clusters of sequences for which function is relatively unknown.
 
 ## HMMER sequence search
 
